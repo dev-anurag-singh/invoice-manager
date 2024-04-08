@@ -104,7 +104,15 @@ const config = {
           {
             lineHeight: '1.125rem',
             letterSpacing: '-0.1px',
-            fontWeight: '700',
+            fontWeight: '600',
+          },
+        ],
+        xs: [
+          '0.8125rem',
+          {
+            lineHeight: '0.9375rem',
+            letterSpacing: '-0.25px',
+            fontWeight: '600',
           },
         ],
       },
