@@ -75,6 +75,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  #icon-plus path {
+    @apply stroke-primary;
+  }
 }
 
 html,
