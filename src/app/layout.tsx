@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { League_Spartan } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import { cn } from '@/lib/utils';
 
 const font = League_Spartan({ subsets: ['latin'] });
 
@@ -16,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={font.className}>
+    <html lang='en' className=''>
+      <body className={cn(font.className)}>
         <div className='flex flex-col h-full lg:flex-row'>
           <Navbar />
           <main className='basis-full'>{children}</main>
