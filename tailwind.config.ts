@@ -12,9 +12,13 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: {
+        DEFAULT: '2rem',
+        sm: '2rem',
+        md: '3rem',
+      },
       screens: {
-        '2xl': '1400px',
+        lg: '760px',
       },
     },
     extend: {
@@ -53,7 +57,13 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        scrollbar: {
+          DEFAULT: 'hsl(var(--scrollbar))',
+        },
         'carbon-blue': '#373B53',
+        green: {
+          DEFAULT: '#33D69F',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -75,7 +85,7 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontSize: {
-        lg: [
+        xl: [
           '2.25rem',
           {
             lineHeight: '2.0625rem',
@@ -83,7 +93,7 @@ const config = {
             fontWeight: '700',
           },
         ],
-        md: [
+        lg: [
           '1.5rem',
           {
             lineHeight: '1.375rem',
@@ -91,10 +101,18 @@ const config = {
             fontWeight: '700',
           },
         ],
-        sm: [
+        md: [
           '0.9375rem',
           {
             lineHeight: '1.5rem',
+            letterSpacing: '-0.25px',
+            fontWeight: '700',
+          },
+        ],
+        sm: [
+          '0.9375rem',
+          {
+            lineHeight: '15px',
             letterSpacing: '-0.25px',
             fontWeight: '700',
           },
@@ -110,8 +128,8 @@ const config = {
         xs: [
           '0.8125rem',
           {
-            lineHeight: '0.9375rem',
-            letterSpacing: '-0.25px',
+            lineHeight: '15px',
+            letterSpacing: '-0.1px',
             fontWeight: '600',
           },
         ],
