@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 function Navbar() {
   return (
-    <header className='flex bg-carbon-blue justify-between lg:flex-col lg:rounded-r-3xl'>
+    <header className='flex bg-carbon-blue dark:bg-muted justify-between lg:flex-col lg:rounded-r-3xl'>
       <div>
         <Logo />
       </div>
@@ -12,7 +12,7 @@ function Navbar() {
         <Moon className=' fill-foreground-light cursor-pointer transition-colors hover:fill-white/70  stroke-inherit' />
         <div className='w-[1px] bg-[#494E6E] self-stretch lg:w-full lg:h-[1px]' />
         <Avatar>
-          <AvatarImage src='https://github.com/shadcn.png' />
+          <AvatarImage src='https://github.com/dev-anurag-singh.png' />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
