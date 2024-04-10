@@ -97,7 +97,7 @@ const config = {
           '1.5rem',
           {
             lineHeight: '1.375rem',
-            letterSpacing: '-0.25px',
+            letterSpacing: '-0.75px',
             fontWeight: '700',
           },
         ],
