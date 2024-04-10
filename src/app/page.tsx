@@ -4,8 +4,11 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ChevronDown, CirclePlus } from 'lucide-react';
 
+// IMPORTING DATA
+import data from '@/data.json';
+
 export default function Home() {
-  const invoices = [];
+  const invoices = data;
   return (
     <div className='container md:px-12 gap-8 py-8 h-full grid grid-cols-1 grid-rows-[auto_1fr]'>
       <div className='flex items-center gap-5'>
@@ -29,15 +32,9 @@ export default function Home() {
       {invoices.length ? (
         <ScrollArea className='h-full'>
           <div className='space-y-4 md:px-3'>
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
-            <InvoiceCard />
+            {invoices.map(invoice => (
+              <InvoiceCard key={invoice.id} />
+            ))}
           </div>
         </ScrollArea>
       ) : (
