@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 function EmptyInvoices() {
   return (
-    <div className='grid place-items-center overflow-y-auto'>
+    <div className='grid place-items-center'>
       <div className='flex flex-col items-center gap-11 md:gap-16'>
         <Image
           src={'/empty.svg'}
