@@ -17,11 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className=''>
+    <html lang='en' className='dark'>
       <body className={cn(font.className)}>
-        <div className='flex flex-col h-full lg:flex-row'>
+        <div className='flex flex-col h-screen lg:flex-row'>
           <Navbar />
-          <main className='basis-full'>{children}</main>
+          <main className='basis-full overflow-hidden'>{children}</main>
         </div>
       </body>
     </html>
