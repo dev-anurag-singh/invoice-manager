@@ -14,11 +14,10 @@ const config = {
       center: true,
       padding: {
         DEFAULT: '2rem',
-        sm: '2rem',
         md: '3rem',
       },
       screens: {
-        lg: '760px',
+        lg: '826px',
       },
     },
     extend: {
@@ -63,6 +62,12 @@ const config = {
         'carbon-blue': '#373B53',
         green: {
           DEFAULT: '#33D69F',
+        },
+        orange: {
+          DEFAULT: '#FF8F00',
+        },
+        grey: {
+          DEFAULT: '#979797',
         },
       },
       borderRadius: {
