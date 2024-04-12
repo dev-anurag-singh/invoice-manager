@@ -14,7 +14,9 @@ export default function Home() {
       <div className='flex items-center gap-5'>
         <div className='mr-auto flex flex-col'>
           <h2 className='text-lg md:text-xl'>Invoices</h2>
-          <span className='text-foreground-light text-xs'>7 invoices</span>
+          <span className='text-foreground-light text-xs'>
+            {invoices.length} invoices
+          </span>
         </div>
         {/* TODO: ADDING A POPOVER */}
         <div className='flex items-center gap-2'>
@@ -33,7 +35,7 @@ export default function Home() {
         <ScrollArea className='h-full'>
           <div className='space-y-4 md:px-3'>
             {invoices.map(invoice => (
-              <InvoiceCard key={invoice.id} />
+              <InvoiceCard key={invoice.id} invoice={invoice} />
             ))}
           </div>
         </ScrollArea>
