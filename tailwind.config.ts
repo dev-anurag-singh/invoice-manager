@@ -34,6 +34,7 @@ const config = {
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
+          hover: 'hsl(var(--secondary-hover))',
           foreground: 'hsl(var(--secondary-foreground))',
         },
         destructive: {
@@ -127,7 +128,7 @@ const config = {
           {
             lineHeight: '1.125rem',
             letterSpacing: '-0.1px',
-            fontWeight: '600',
+            fontWeight: '500',
           },
         ],
         xs: [
@@ -135,7 +136,7 @@ const config = {
           {
             lineHeight: '15px',
             letterSpacing: '-0.1px',
-            fontWeight: '600',
+            fontWeight: '500',
           },
         ],
       },
