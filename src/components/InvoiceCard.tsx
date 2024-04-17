@@ -3,6 +3,7 @@ import { Card, CardContent } from './ui/card';
 import moment from 'moment';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import InvoiceStatus from './InvoiceStatus';
 
 interface InvoiceCardProps {
   invoice: {
@@ -35,20 +36,7 @@ function InvoiceCard({ invoice }: InvoiceCardProps) {
             </div>
             <div className='flex justify-between items-end md:items-center md:grid md:grid-cols-[2fr_2fr_1fr] md:gap-3'>
               <p className='text-md text-foreground'>$ {invoice.total}</p>
-              <div
-                className={cn(
-                  'pt-[14px] pb-[11px] w-[6.5rem] bg-carbon-blue/5 text-carbon-blue dark:bg-grey/5 dark:text-[#DFE3FA]  rounded-sm flex items-center justify-center',
-                  {
-                    'bg-green/5 text-green': invoice.status === 'paid',
-                    'bg-orange/5 text-orange': invoice.status === 'pending',
-                  }
-                )}
-              >
-                <Dot className='stroke-[8px]' />
-                <p className='text-sm pt-[3px] pr-[6px] capitalize'>
-                  {invoice.status}
-                </p>
-              </div>
+              <InvoiceStatus status={invoice.status} />
               <div className='hidden md:block cursor-pointer pl-2'>
                 <ChevronRight className='h-4 w-4 group-hover:translate-x-1 transition-transform' />
               </div>
