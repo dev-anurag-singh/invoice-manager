@@ -26,7 +26,7 @@ export default function Home() {
           </span>
         </div>
         {/* TODO: ADDING ADD NEW INVOICE MODAL */}
-        <Button className='pl-[6px] pr-4'>
+        <Button className='pl-[6px] pr-4 py-2'>
           <CirclePlus id='icon-plus' className='h-8 w-8 fill-white mr-2' />
           <span className='mt-[2px]'>New</span>
         </Button>
