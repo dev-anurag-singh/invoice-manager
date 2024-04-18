@@ -19,7 +19,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
             <p className='text-xs text-foreground-light'>Status</p>
             <InvoiceStatus status='pending' />
           </div>
-          <div className='p-6 shadow-sm bg-muted rounded-lg text-muted-foreground'>
+          <div className='p-6 space-y-8 shadow-sm bg-muted rounded-lg text-muted-foreground'>
             <div className='space-y-7'>
               <div className='space-y-1'>
                 <h4 className='text-sm'>
@@ -33,24 +33,40 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 Kingdom
               </p>
             </div>
-            <div>
-              <div>
-                <div>
-                  <p>Invoice Date</p>
-                  <h4>21 Aug 2021</h4>
+            <div className='space-y-8'>
+              <div className='flex gap-16'>
+                <div className='flex flex-col justify-between'>
+                  <div className='space-y-3'>
+                    <p className='text-xs'>Invoice Date</p>
+                    <h4 className='text-md leading-5 text-foreground'>
+                      21 Aug 2021
+                    </h4>
+                  </div>
+                  <div className='space-y-3'>
+                    <p className='text-xs'>Payment Due</p>
+                    <h4 className='text-md leading-5 text-foreground'>
+                      20 Sep 2021
+                    </h4>
+                  </div>
                 </div>
-                <div>
-                  <p>Payment Due</p>
-                  <h4>20 Sep 2021</h4>
+                <div className='space-y-2'>
+                  <div className='space-y-3'>
+                    <p className='text-xs'>Bill To</p>
+                    <h4 className='text-md leading-5 text-foreground'>
+                      Alex Grim
+                    </h4>
+                  </div>
+                  <p className='text-base'>
+                    84 Church Way <br /> Brandford <br /> BD1 9PB <br /> United
+                    Kingdom
+                  </p>
                 </div>
               </div>
-              <div>
-                <p>Bill To</p>
-                <h4>Alex Grim</h4>
-                <p>
-                  84 Church Way <br /> Brandford <br /> BD1 9PB <br /> United
-                  Kingdom
-                </p>
+              <div className='space-y-4'>
+                <p className='text-xs'>Sent to</p>
+                <h4 className='text-md leading-5 text-foreground'>
+                  alexgrim@mail.com
+                </h4>
               </div>
             </div>
           </div>
