@@ -13,7 +13,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
         </span>
         <span className='text-sm mt-1'>Go back</span>
       </Link>
-      <ScrollArea>
+      <ScrollArea type='auto'>
         <div className='space-y-4'>
           <div className='bg-muted shadow-sm rounded-lg p-6 flex justify-between items-center'>
             <p className='text-xs text-foreground-light'>Status</p>
@@ -67,6 +67,28 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 <h4 className='text-md leading-5 text-foreground'>
                   alexgrim@mail.com
                 </h4>
+              </div>
+            </div>
+            <div>
+              <div className='p-6 space-y-6 rounded-t-md shadow-sm bg-accent text-accent-foreground'>
+                <div className='text-sm flex justify-between items-center'>
+                  <div className='space-y-2'>
+                    <h6 className='text-foreground'>Banner Design</h6>
+                    <p>1 x $ 200.00</p>
+                  </div>
+                  <h6 className='text-foreground'>$ 200.00</h6>
+                </div>
+                <div className='text-sm flex justify-between items-center'>
+                  <div className='space-y-2'>
+                    <h6 className='text-foreground'>Email Design</h6>
+                    <p>1 x $ 150.00</p>
+                  </div>
+                  <h6 className='text-foreground'>$ 150.00</h6>
+                </div>
+              </div>
+              <div className='text-white flex justify-between items-center bg-carbon-blue p-6 rounded-b-md'>
+                <p>Grand Total</p>
+                <h4 className='text-lg leading-8'>$ 350.00</h4>
               </div>
             </div>
           </div>
