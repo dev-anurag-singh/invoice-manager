@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang='en' className=''>
       <body className={cn(font.className)}>
-        <div className='flex flex-col h-screen lg:flex-row'>
+        <div className='flex flex-col h-[100dvh] lg:flex-row'>
           <Navbar />
           <main className='basis-full overflow-hidden'>{children}</main>
         </div>
