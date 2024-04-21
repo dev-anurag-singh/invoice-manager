@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className=''>
+    <html lang='en' className='dark'>
       <body className={cn(font.className)}>
         <div className='flex flex-col h-[100dvh] lg:flex-row'>
           <Navbar />
