@@ -19,8 +19,8 @@ function InvoiceCard({ invoice }: InvoiceCardProps) {
   return (
     <Link href={`/invoices/${invoice.id}`} className='block'>
       <Card className='hover:border-primary hover:shadow-md group transition-all'>
-        <CardContent className='pt-6'>
-          <div className='space-y-6 md:space-y-0 relative md:grid md:grid-cols-[4fr_3fr] md:items-center md:gap-2'>
+        <CardContent className='pt-6 md:py-4'>
+          <div className='space-y-6 md:space-y-0 relative md:grid md:grid-cols-[4fr_3fr] md:items-center md:gap-10'>
             <div className='flex justify-between md:grid md:grid-cols-[2fr_3fr_3fr]'>
               <div className='text-sm'>
                 <span className=''>#</span>
@@ -38,7 +38,7 @@ function InvoiceCard({ invoice }: InvoiceCardProps) {
               <p className='text-md text-foreground'>$ {invoice.total}</p>
               <InvoiceStatus status={invoice.status} />
               <div className='hidden md:block cursor-pointer pl-2'>
-                <ChevronRight className='h-4 w-4 group-hover:translate-x-1 transition-transform' />
+                <ChevronRight className='h-4 w-4 stroke-[3px] group-hover:translate-x-1 stroke-primary transition-transform' />
               </div>
             </div>
           </div>
