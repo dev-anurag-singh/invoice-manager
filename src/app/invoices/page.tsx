@@ -28,7 +28,8 @@ export default function Home() {
         {/* TODO: ADDING ADD NEW INVOICE MODAL */}
         <Button className='pl-[6px] pr-4 py-2'>
           <CirclePlus id='icon-plus' className='h-8 w-8 fill-white mr-2' />
-          <span className='mt-[2px]'>New</span>
+          <span className='mt-[2px] mr-1'>New</span>
+          <span className='hidden md:inline-block mt-[2px]'>Invoice</span>
         </Button>
       </div>
       {invoices.length ? (
