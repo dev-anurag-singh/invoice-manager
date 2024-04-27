@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={cn(font.className)}>
         <div className='flex flex-col h-[100dvh] lg:flex-row'>
           <Navbar />
-          <main className='basis-full overflow-hidden'>{children}</main>
+          <main id='main' className='basis-full overflow-hidden relative'>
+            {children}
+          </main>
         </div>
       </body>
     </html>
