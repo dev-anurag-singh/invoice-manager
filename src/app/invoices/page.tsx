@@ -6,6 +6,7 @@ import { ChevronDown, CirclePlus } from 'lucide-react';
 
 // IMPORTING DATA
 import data from '@/data.json';
+import CreateInvoice from '@/components/CreateInvoice';
 
 export default function Home() {
   const invoices = data;
@@ -25,12 +26,7 @@ export default function Home() {
             <ChevronDown className='h-4 w-4 stroke-primary' />
           </span>
         </div>
-        {/* TODO: ADDING ADD NEW INVOICE MODAL */}
-        <Button className='pl-[6px] pr-4 py-2'>
-          <CirclePlus id='icon-plus' className='h-8 w-8 fill-white mr-2' />
-          <span className='mt-[2px] mr-1'>New</span>
-          <span className='hidden md:inline-block mt-[2px]'>Invoice</span>
-        </Button>
+        <CreateInvoice />
       </div>
       {invoices.length ? (
         <ScrollArea className='h-full'>
