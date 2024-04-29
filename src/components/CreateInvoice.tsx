@@ -12,6 +12,7 @@ import { Button } from './ui/button';
 import { ChevronLeft, CirclePlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import InvoiceForm from './InvoiceForm';
+import { ScrollArea } from './ui/scroll-area';
 
 function CreateInvoice() {
   const [isMounted, setIsMounted] = useState(false);
@@ -30,21 +31,25 @@ function CreateInvoice() {
         </Button>
       </SheetTrigger>
       {isMounted && (
-        <SheetContent side={'left'} className='w-full'>
-          <SheetTrigger className='flex gap-6 items-center mb-7'>
-            <span>
-              <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
-            </span>
-            <span className='text-sm mt-1'>Go back</span>
-          </SheetTrigger>
-          <SheetHeader>
-            <SheetTitle className='text-lg leading-8 text-left'>
-              New Invoice
-            </SheetTitle>
-          </SheetHeader>
-          <div className='mt-6'>
-            <InvoiceForm />
-          </div>
+        <SheetContent side={'left'} className='w-full px-3 md:px-9'>
+          <ScrollArea type='auto' className='h-full'>
+            <div className='mx-3 md:mx-5'>
+              <SheetTrigger className='flex gap-6 items-center mb-7 md:hidden'>
+                <span>
+                  <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
+                </span>
+                <span className='text-sm mt-1'>Go back</span>
+              </SheetTrigger>
+              <SheetHeader>
+                <SheetTitle className='text-lg leading-8 text-left'>
+                  New Invoice
+                </SheetTitle>
+              </SheetHeader>
+              <div className='mt-6'>
+                <InvoiceForm />
+              </div>
+            </div>
+          </ScrollArea>
         </SheetContent>
       )}
     </Sheet>
