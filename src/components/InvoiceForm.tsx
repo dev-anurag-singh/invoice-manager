@@ -1,10 +1,15 @@
 'use client';
-
+import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
 import { Input } from './ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Button } from './ui/button';
+import { CalendarIcon } from 'lucide-react';
+import { Calendar } from './ui/calendar';
+import moment from 'moment';
 
 const formSchema = z.object({
   from: z.object({
@@ -21,11 +26,9 @@ const formSchema = z.object({
   }),
   clientName: z.string().min(3, { message: 'Enter a valid name' }),
   clientEmail: z.string().email({ message: 'Enter a valid email' }),
-  invoiceDate: z
-    .date({
-      required_error: 'Enter a valid date',
-    })
-    .min(new Date(), { message: 'Too old' }),
+  invoiceDate: z.date({
+    required_error: 'Enter a valid date',
+  }),
   paymentTerm: z
     .number()
     .gte(1, { message: 'Invalid' })
@@ -182,11 +185,35 @@ function InvoiceForm() {
               control={form.control}
               name='invoiceDate'
               render={({ field }) => (
-                <FormItem className=''>
+                <FormItem className='flex flex-col'>
                   <FormLabel>Invoice Date</FormLabel>
-                  <FormControl>
-                    <Input placeholder='' {...field} />
-                  </FormControl>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={'outline'}
+                          className='rounded-md bg-muted flex justify-between items-center'
+                        >
+                          {field.value ? (
+                            moment(field.value).format('D MMM YYYY')
+                          ) : (
+                            <span className='text-muted-foreground'>
+                              Pick a Date
+                            </span>
+                          )}
+                          <CalendarIcon className='h-4 w-4 opacity-50' />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-auto p-0' align='start'>
+                      <Calendar
+                        mode='single'
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </FormItem>
               )}
             />
