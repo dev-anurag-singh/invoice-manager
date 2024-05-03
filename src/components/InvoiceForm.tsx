@@ -179,20 +179,19 @@ function InvoiceForm() {
               />
             </div>
           </div>
-          <div>
-            {/* change input to date picker */}
+          <div className='grid grid-cols-1 grid-row-3 gap-6 md:grid-cols-2 md:grid-rows-2'>
             <FormField
               control={form.control}
               name='invoiceDate'
               render={({ field }) => (
-                <FormItem className='flex flex-col'>
+                <FormItem className=''>
                   <FormLabel>Invoice Date</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
                           variant={'outline'}
-                          className='rounded-md bg-muted flex justify-between items-center'
+                          className='rounded-md bg-muted flex justify-between items-center w-full h-12'
                         >
                           {field.value ? (
                             moment(field.value).format('D MMM YYYY')
@@ -214,6 +213,30 @@ function InvoiceForm() {
                       />
                     </PopoverContent>
                   </Popover>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='paymentTerm'
+              render={({ field }) => (
+                <FormItem className=''>
+                  <FormLabel>Payment Terms</FormLabel>
+                  <FormControl>
+                    <Input placeholder='' {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='description'
+              render={({ field }) => (
+                <FormItem className='md:col-span-2'>
+                  <FormLabel>Project Description</FormLabel>
+                  <FormControl>
+                    <Input placeholder='' {...field} />
+                  </FormControl>
                 </FormItem>
               )}
             />
