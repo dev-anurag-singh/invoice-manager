@@ -13,6 +13,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from './ui/select';
@@ -228,18 +229,18 @@ function InvoiceForm() {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className='h-12 px-6 bg-muted'>
-                        <SelectValue placeholder='Select a payment term' />
+                      <SelectTrigger className='h-12 px-6 pt-[18px] pb-[15px] bg-muted'>
+                        <SelectValue placeholder='Select Payment Term' />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value='m@example.com'>
-                        m@example.com
-                      </SelectItem>
-                      <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                      <SelectItem value='m@support.com'>
-                        m@support.com
-                      </SelectItem>
+                      <SelectItem value='1'>Net 1 Day</SelectItem>
+                      <SelectSeparator />
+                      <SelectItem value='7'>Net 7 Days</SelectItem>
+                      <SelectSeparator />
+                      <SelectItem value='14'>Net 14 Days</SelectItem>
+                      <SelectSeparator />
+                      <SelectItem value='30'>Net 30 Days</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormItem>
