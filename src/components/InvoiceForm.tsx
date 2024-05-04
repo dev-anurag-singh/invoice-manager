@@ -1,5 +1,4 @@
 'use client';
-import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,6 +9,13 @@ import { Button } from './ui/button';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from './ui/calendar';
 import moment from 'moment';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select';
 
 const formSchema = z.object({
   from: z.object({
@@ -29,10 +35,7 @@ const formSchema = z.object({
   invoiceDate: z.date({
     required_error: 'Enter a valid date',
   }),
-  paymentTerm: z
-    .number()
-    .gte(1, { message: 'Invalid' })
-    .int({ message: 'Invalid' }),
+  paymentTerm: z.string({ required_error: 'Required' }),
   description: z.string({ required_error: 'Enter a description' }),
 });
 
@@ -191,14 +194,12 @@ function InvoiceForm() {
                       <FormControl>
                         <Button
                           variant={'outline'}
-                          className='rounded-md bg-muted flex justify-between items-center w-full h-12'
+                          className='rounded-md bg-muted hover:bg-muted hover:text-foreground flex justify-between items-center w-full h-12'
                         >
                           {field.value ? (
                             moment(field.value).format('D MMM YYYY')
                           ) : (
-                            <span className='text-muted-foreground'>
-                              Pick a Date
-                            </span>
+                            <span>Pick a Date</span>
                           )}
                           <CalendarIcon className='h-4 w-4 opacity-50' />
                         </Button>
@@ -220,11 +221,27 @@ function InvoiceForm() {
               control={form.control}
               name='paymentTerm'
               render={({ field }) => (
-                <FormItem className=''>
-                  <FormLabel>Payment Terms</FormLabel>
-                  <FormControl>
-                    <Input placeholder='' {...field} />
-                  </FormControl>
+                <FormItem>
+                  <FormLabel>Payment Term</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className='h-12 px-6 bg-muted'>
+                        <SelectValue placeholder='Select a payment term' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='m@example.com'>
+                        m@example.com
+                      </SelectItem>
+                      <SelectItem value='m@google.com'>m@google.com</SelectItem>
+                      <SelectItem value='m@support.com'>
+                        m@support.com
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />
