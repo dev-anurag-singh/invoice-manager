@@ -32,7 +32,7 @@
 
     --scrollbar: 231 73% 93%;
 
-    --border: 231 75% 100%;
+    --border: 231 15% 90%;
     --input: 231 75% 93%;
     --ring: 222.2 84% 4.9%;
 
@@ -44,10 +44,10 @@
     --foreground: 0 0% 100%;
     --foreground-light: 231 75% 93%;
 
-    --card: 233 30% 21%;
+    --card: 233 31% 17%;
     --card-foreground: 231 75% 93%;
 
-    --popover: 233 30% 21%;
+    --popover: 233 31% 17%;
     --popover-foreground: 0 0% 100%;
 
     --primary: 252 94% 67%;
@@ -68,7 +68,7 @@
 
     --scrollbar: 233 31% 17%;
 
-    --border: 233 31% 17%;
+    --border: 231 20% 18%;
     --input: 233 30% 21%;
     --ring: 212.7 26.8% 83.9%;
   }
