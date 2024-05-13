@@ -8,7 +8,7 @@ const font = League_Spartan({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Invoice Manager',
-  description: 'Manage your invoices all from a single place',
+  description: 'Manage all your invoices from a single place',
 };
 
 export default function RootLayout({
