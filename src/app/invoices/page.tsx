@@ -1,8 +1,7 @@
 import EmptyInvoices from '@/components/EmptyInvoices';
 import InvoiceCard from '@/components/InvoiceCard';
-import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ChevronDown, CirclePlus } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 // IMPORTING DATA
 import data from '@/data.json';
