@@ -1,12 +1,12 @@
 'use client';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
 import { Input } from './ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Button } from './ui/button';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Trash } from 'lucide-react';
 import { Calendar } from './ui/calendar';
 import moment from 'moment';
 import {
@@ -38,11 +38,26 @@ const formSchema = z.object({
   }),
   paymentTerm: z.string({ required_error: 'Required' }),
   description: z.string({ required_error: 'Enter a description' }),
+  items: z
+    .object({
+      name: z.string().min(1, { message: 'Required' }),
+      quantity: z.number(),
+      price: z.number(),
+    })
+    .array(),
 });
 
 function InvoiceForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      items: [{ name: 'anurag' }, { name: 'soni' }],
+    },
+  });
+
+  const { fields } = useFieldArray({
+    control: form.control,
+    name: 'items',
   });
 
   const onSubmit = (values: any) => {
@@ -259,8 +274,74 @@ function InvoiceForm() {
               )}
             />
           </div>
-          <div>
-            <h4 className='text-sm text-[#777F98]'>Item List</h4>
+          <div className='space-y-5'>
+            <h4 className='text-[1.125rem] leading-8 font-bold text-[#777F98]'>
+              Item List
+            </h4>
+            <div className='space-y-12'>
+              {fields.map((item, index) => (
+                <div key={item.id} className='flex flex-col gap-6 md:flex-row'>
+                  <FormField
+                    control={form.control}
+                    name={`items.${index}.name`}
+                    render={({ field }) => (
+                      <FormItem className=''>
+                        <FormLabel>Item Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder='' {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <div className='flex gap-4'>
+                    <FormField
+                      control={form.control}
+                      name={`items.${index}.quantity`}
+                      render={({ field }) => (
+                        <FormItem className=''>
+                          <FormLabel>QTY.</FormLabel>
+                          <FormControl>
+                            <Input
+                              className='w-16'
+                              type='number'
+                              placeholder=''
+                              {...field}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`items.${index}.price`}
+                      render={({ field }) => (
+                        <FormItem className=''>
+                          <FormLabel>Price</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder=''
+                              className='w-[6.25rem]'
+                              {...field}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <div className='space-y-2 text-muted-foreground'>
+                      <label htmlFor='total' className='text-xs'>
+                        Total
+                      </label>
+                      <p className='h-12 text-sm grid place-content-center'>
+                        400.00
+                      </p>
+                    </div>
+                    <div className='grid place-content-center ml-auto md:ml-6 mt-7 mr-2 md:mr-0'>
+                      <Trash className='fill-[#888EB0] stroke-[#888EB0]' />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </form>
