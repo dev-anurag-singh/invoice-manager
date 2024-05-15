@@ -259,6 +259,9 @@ function InvoiceForm() {
               )}
             />
           </div>
+          <div>
+            <h4 className='text-sm text-[#777F98]'>Item List</h4>
+          </div>
         </div>
       </form>
     </Form>
