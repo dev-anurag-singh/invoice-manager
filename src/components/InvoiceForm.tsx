@@ -67,7 +67,7 @@ function InvoiceForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className='space-y-10'>
+        <div className='space-y-10 pb-44'>
           <div className='space-y-6'>
             <h4 className='text-sm text-primary '>Bill From</h4>
             <div className='grid grid-cols-2 grid-rows-3 gap-6'>
@@ -210,7 +210,7 @@ function InvoiceForm() {
                       <FormControl>
                         <Button
                           variant={'outline'}
-                          className='rounded-md bg-muted hover:bg-muted hover:text-foreground flex justify-between items-center w-full h-12'
+                          className='rounded-md bg-transparent hover:bg-transparent hover:text-foreground text-foreground flex justify-between items-center w-full h-12'
                         >
                           {field.value ? (
                             moment(field.value).format('D MMM YYYY')
@@ -244,7 +244,7 @@ function InvoiceForm() {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className='h-12 px-6 pt-[18px] pb-[15px] bg-muted'>
+                      <SelectTrigger className='h-12 px-6 pt-[18px] pb-[15px] bg-transparent text-foreground'>
                         <SelectValue placeholder='Select Payment Term' />
                       </SelectTrigger>
                     </FormControl>
@@ -342,6 +342,13 @@ function InvoiceForm() {
                 </div>
               ))}
             </div>
+            <Button variant={'secondary'} className='w-full'>
+              + Add New Item
+            </Button>
+          </div>
+          <div className='absolute bottom-0'>
+            <Button variant={'secondary'}>Cancel</Button>
+            <Button>Save Changes</Button>
           </div>
         </div>
       </form>
