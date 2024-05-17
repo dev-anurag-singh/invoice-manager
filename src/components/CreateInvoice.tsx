@@ -31,14 +31,14 @@ function CreateInvoice() {
         </Button>
       </SheetTrigger>
       {isMounted && (
-        <SheetContent side={'left'} className='w-full px-3 md:px-9'>
+        <SheetContent side={'left'} className='w-full pt-8 pb-0 pr-2 md:px-9'>
           <ScrollArea type='auto' className='h-full'>
-            <div className='mx-3 md:mx-5'>
+            <div className='mr-4 md:mr-5'>
               <SheetTrigger className='flex gap-6 items-center mb-7 md:hidden'>
                 <span>
                   <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
                 </span>
-                <span className='text-sm mt-1'>Go back</span>
+                <span className='text-sm mt-1 text-foreground'>Go back</span>
               </SheetTrigger>
               <SheetHeader>
                 <SheetTitle className='text-lg leading-8 text-left'>
