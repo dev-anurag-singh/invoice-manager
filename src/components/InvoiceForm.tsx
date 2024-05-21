@@ -20,29 +20,29 @@ import { ScrollArea } from './ui/scroll-area';
 
 const formSchema = z.object({
   from: z.object({
-    street: z.string().min(1, { message: 'Required' }),
-    city: z.string().min(1, { message: 'Required' }),
-    post: z.string().min(1, { message: 'Required' }),
-    country: z.string().min(1, { message: 'Required' }),
+    street: z.string(),
+    city: z.string(),
+    post: z.string(),
+    country: z.string(),
   }),
   to: z.object({
-    street: z.string().min(1, { message: 'Required' }),
-    city: z.string().min(1, { message: 'Required' }),
-    post: z.string().min(1, { message: 'Required' }),
-    country: z.string().min(1, { message: 'Required' }),
+    street: z.string(),
+    city: z.string(),
+    post: z.string(),
+    country: z.string(),
   }),
   clientName: z.string().min(3, { message: 'Enter a valid name' }),
   clientEmail: z.string().email({ message: 'Enter a valid email' }),
   invoiceDate: z.date({
     required_error: 'Enter a valid date',
   }),
-  paymentTerm: z.string({ required_error: 'Required' }),
+  paymentTerm: z.string(),
   description: z.string({ required_error: 'Enter a description' }),
   items: z
     .object({
-      name: z.string().min(1, { message: 'Required' }),
-      quantity: z.number(),
-      price: z.number(),
+      name: z.string().min(3, { message: 'Enter a valid Item Name' }),
+      quantity: z.coerce.number().min(1),
+      price: z.coerce.number().min(1),
     })
     .array(),
 });
@@ -54,15 +54,15 @@ interface InvoiceFormProps {
 function InvoiceForm({ onClose }: InvoiceFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      items: [{ name: 'anurag' }, { name: 'soni' }],
-    },
+    defaultValues: {},
   });
 
-  const { fields } = useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control: form.control,
     name: 'items',
   });
+
+  const watchQtyAndPrice = form.watch('items');
 
   const onSubmit = (values: any) => {
     console.log(values);
@@ -313,9 +313,8 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                             <FormLabel>QTY.</FormLabel>
                             <FormControl>
                               <Input
-                                className='w-16'
                                 type='number'
-                                placeholder=''
+                                className='w-16'
                                 {...field}
                               />
                             </FormControl>
@@ -330,7 +329,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                             <FormLabel>Price</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder=''
+                                type='number'
                                 className='w-[6.25rem]'
                                 {...field}
                               />
@@ -341,17 +340,25 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <div className='space-y-2 text-muted-foreground'>
                         <label className='text-xs'>Total</label>
                         <p className='h-12 text-sm grid place-content-center'>
-                          400.00
+                          400
                         </p>
                       </div>
-                      <div className='grid place-content-center ml-auto md:ml-6 mt-7 mr-2 md:mr-0'>
+                      <button
+                        onClick={() => remove(index)}
+                        className='grid place-content-center ml-auto md:ml-6 mt-7 mr-2 md:mr-0'
+                      >
                         <Trash className='fill-[#888EB0] stroke-[#888EB0]' />
-                      </div>
+                      </button>
                     </div>
                   </div>
                 ))}
               </div>
-              <Button variant={'secondary'} className='w-full'>
+              <Button
+                type='button'
+                onClick={() => append({ name: '', price: 100, quantity: 1 })}
+                variant={'secondary'}
+                className='w-full'
+              >
                 + Add New Item
               </Button>
             </div>
