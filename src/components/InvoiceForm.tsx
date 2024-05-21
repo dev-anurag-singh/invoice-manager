@@ -296,7 +296,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       control={form.control}
                       name={`items.${index}.name`}
                       render={({ field }) => (
-                        <FormItem className=''>
+                        <FormItem className='md:w-48 shrink-0'>
                           <FormLabel>Item Name</FormLabel>
                           <FormControl>
                             <Input placeholder='' {...field} />
@@ -304,7 +304,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                         </FormItem>
                       )}
                     />
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 md:basis-full'>
                       <FormField
                         control={form.control}
                         name={`items.${index}.quantity`}
@@ -340,12 +340,13 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <div className='space-y-2 text-muted-foreground'>
                         <label className='text-xs'>Total</label>
                         <p className='h-12 text-sm grid place-content-center'>
-                          400
+                          {(watchQtyAndPrice.at(index)?.price || 0) *
+                            (watchQtyAndPrice.at(index)?.quantity || 0)}
                         </p>
                       </div>
                       <button
                         onClick={() => remove(index)}
-                        className='grid place-content-center ml-auto md:ml-6 mt-7 mr-2 md:mr-0'
+                        className='grid place-content-center ml-auto mt-7 mr-2 md:mr-0'
                       >
                         <Trash className='fill-[#888EB0] stroke-[#888EB0]' />
                       </button>
