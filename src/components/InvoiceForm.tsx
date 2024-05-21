@@ -296,7 +296,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       control={form.control}
                       name={`items.${index}.name`}
                       render={({ field }) => (
-                        <FormItem className='md:w-48 shrink-0'>
+                        <FormItem className=''>
                           <FormLabel>Item Name</FormLabel>
                           <FormControl>
                             <Input placeholder='' {...field} />
@@ -304,7 +304,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                         </FormItem>
                       )}
                     />
-                    <div className='flex gap-4 md:basis-full'>
+                    <div className='flex gap-4'>
                       <FormField
                         control={form.control}
                         name={`items.${index}.quantity`}
@@ -337,9 +337,9 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                           </FormItem>
                         )}
                       />
-                      <div className='space-y-2 text-muted-foreground'>
+                      <div className='space-y-2 md:w-[4.5rem] overflow-clip text-muted-foreground'>
                         <label className='text-xs'>Total</label>
-                        <p className='h-12 text-sm grid place-content-center'>
+                        <p className='h-12 text-sm grid items-center'>
                           {(watchQtyAndPrice.at(index)?.price || 0) *
                             (watchQtyAndPrice.at(index)?.quantity || 0)}
                         </p>
@@ -367,9 +367,9 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
         </ScrollArea>
         <div className='p-6 border-t flex gap-2 justify-end'>
           <Button onClick={onClose} type='button' variant={'secondary'}>
-            Cancel
+            Save as draft
           </Button>
-          <Button>Save Changes</Button>
+          <Button>Save & Send</Button>
         </div>
       </form>
     </Form>
