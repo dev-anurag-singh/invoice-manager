@@ -365,8 +365,13 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
             </div>
           </div>
         </ScrollArea>
-        <div className='p-6 border-t flex gap-2 justify-end'>
-          <Button onClick={onClose} type='button' variant={'secondary'}>
+        <div className='p-6 md:px-14 md:py-8 border-t flex gap-2 justify-end'>
+          <div className='mr-auto hidden sm:block'>
+            <Button type='button' onClick={onClose} variant={'secondary'}>
+              Discard
+            </Button>
+          </div>
+          <Button type='button' variant={'tertiary'}>
             Save as draft
           </Button>
           <Button>Save & Send</Button>
