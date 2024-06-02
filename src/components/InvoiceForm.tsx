@@ -44,7 +44,8 @@ const formSchema = z.object({
       quantity: z.coerce.number().min(1),
       price: z.coerce.number().min(1),
     })
-    .array(),
+    .array()
+    .min(1, { message: 'An item must be added' }),
 });
 
 interface InvoiceFormProps {
@@ -74,8 +75,8 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
         className='overflow-hidden basis-full flex flex-col'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <ScrollArea type='auto' className='basis-full  mr-2  md:mr-6'>
-          <div className='space-y-10 pl-6 pr-4 md:pl-14 md:pr-8'>
+        <ScrollArea type='auto' className='basis-full mr-2 md:mr-6'>
+          <div className='space-y-10 pl-6 pr-4 md:pl-14 md:pr-8 pb-8'>
             <div className='space-y-6'>
               <h4 className='text-sm text-primary '>Bill From</h4>
               <div className='grid grid-cols-2 grid-rows-3 gap-6'>
@@ -282,7 +283,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 )}
               />
             </div>
-            <div className='space-y-5 pb-6'>
+            <div className='space-y-5'>
               <h4 className='text-[1.125rem] leading-8 font-bold text-[#777F98]'>
                 Item List
               </h4>
@@ -363,6 +364,14 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 + Add New Item
               </Button>
             </div>
+            {!!Object.keys(form.formState.errors).length && (
+              <div className='flex flex-col text-sm font-semibold gap-3 text-destructive'>
+                <span>All fields must be added</span>
+                {form.formState.errors.items && (
+                  <span>{form.formState.errors.items.message}</span>
+                )}
+              </div>
+            )}
           </div>
         </ScrollArea>
         <div className='p-6 md:px-14 md:py-8 border-t flex gap-2 justify-end'>
