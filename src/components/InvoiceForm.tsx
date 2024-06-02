@@ -1,7 +1,14 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Form, FormControl, FormField, FormItem, FormLabel } from './ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form';
 import { Input } from './ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Button } from './ui/button';
@@ -89,6 +96,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
