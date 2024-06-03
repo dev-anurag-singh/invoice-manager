@@ -27,16 +27,16 @@ import { ScrollArea } from './ui/scroll-area';
 
 const formSchema = z.object({
   from: z.object({
-    street: z.string(),
-    city: z.string(),
-    post: z.string(),
-    country: z.string(),
+    street: z.string().min(1, { message: `can't be empty` }),
+    city: z.string().min(1, { message: `can't be empty` }),
+    post: z.string().min(1, { message: `can't be empty` }),
+    country: z.string().min(1, { message: `can't be empty` }),
   }),
   to: z.object({
-    street: z.string(),
-    city: z.string(),
-    post: z.string(),
-    country: z.string(),
+    street: z.string().min(1, { message: `can't be empty` }),
+    city: z.string().min(1, { message: `can't be empty` }),
+    post: z.string().min(1, { message: `can't be empty` }),
+    country: z.string().min(1, { message: `can't be empty` }),
   }),
   clientName: z.string().min(3, { message: 'Invalid name' }),
   clientEmail: z.string().email({ message: 'Invalid email' }),
@@ -46,10 +46,10 @@ const formSchema = z.object({
   paymentTerm: z.enum(['1', '7', '14', '30'], {
     message: 'Invalid Term',
   }),
-  description: z.string(),
+  description: z.string().min(1, { message: `can't be empty` }),
   items: z
     .object({
-      name: z.string().min(3, { message: 'Invalid Name' }),
+      name: z.string().min(1, { message: 'Required' }),
       quantity: z.coerce.number().min(1),
       price: z.coerce.number().min(1),
     })
@@ -64,7 +64,13 @@ interface InvoiceFormProps {
 function InvoiceForm({ onClose }: InvoiceFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      from: { street: '', city: '', post: '', country: '' },
+      to: { street: '', city: '', post: '', country: '' },
+      clientName: '',
+      clientEmail: '',
+      description: '',
+    },
   });
 
   const { fields, remove, append } = useFieldArray({
@@ -84,7 +90,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
         className='overflow-hidden basis-full flex flex-col'
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <ScrollArea type='auto' className='basis-full mr-2 md:mr-6'>
+        <ScrollArea className='basis-full mr-2 md:mr-6'>
           <div className='space-y-10 pl-6 pr-4 md:pl-14 md:pr-8 pb-8'>
             <div className='space-y-6'>
               <h4 className='text-sm text-primary '>Bill From</h4>
