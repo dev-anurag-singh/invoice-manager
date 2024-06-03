@@ -35,7 +35,7 @@ function CreateInvoice() {
         </Button>
       </SheetTrigger>
       {isMounted && (
-        <SheetContent side={'left'} className='w-full px-0 pt-8 pb-0 md:pt-14'>
+        <SheetContent side={'left'} className='px-0 pt-8 pb-0 md:pt-14'>
           <div className='h-full flex flex-col'>
             <SheetTrigger className='flex gap-6 items-center mb-7 md:hidden pl-6 md:pl-14'>
               <span>
