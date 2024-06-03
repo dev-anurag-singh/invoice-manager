@@ -38,16 +38,18 @@ const formSchema = z.object({
     post: z.string(),
     country: z.string(),
   }),
-  clientName: z.string().min(3, { message: 'Enter a valid name' }),
-  clientEmail: z.string().email({ message: 'Enter a valid email' }),
+  clientName: z.string().min(3, { message: 'Invalid name' }),
+  clientEmail: z.string().email({ message: 'Invalid email' }),
   invoiceDate: z.date({
-    required_error: 'Enter a valid date',
+    invalid_type_error: 'Invalid date',
   }),
-  paymentTerm: z.string(),
-  description: z.string({ required_error: 'Enter a description' }),
+  paymentTerm: z.enum(['1', '7', '14', '30'], {
+    message: 'Invalid Term',
+  }),
+  description: z.string(),
   items: z
     .object({
-      name: z.string().min(3, { message: 'Enter a valid Item Name' }),
+      name: z.string().min(3, { message: 'Invalid Name' }),
       quantity: z.coerce.number().min(1),
       price: z.coerce.number().min(1),
     })
@@ -109,6 +111,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -121,6 +124,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -133,6 +137,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -149,6 +154,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                     <FormControl>
                       <Input placeholder='' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -161,6 +167,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                     <FormControl>
                       <Input placeholder='' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -174,6 +181,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -186,6 +194,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -198,6 +207,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -210,6 +220,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                       <FormControl>
                         <Input placeholder='' {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -247,6 +258,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                         />
                       </PopoverContent>
                     </Popover>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -275,6 +287,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                         <SelectItem value='30'>Net 30 Days</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -287,6 +300,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                     <FormControl>
                       <Input placeholder='' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -310,6 +324,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                           <FormControl>
                             <Input placeholder='' {...field} />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -371,15 +386,12 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
               >
                 + Add New Item
               </Button>
+              {form.formState.errors.items && (
+                <p className='text-sm font-semibold text-destructive mt-4'>
+                  {form.formState.errors.items.message}
+                </p>
+              )}
             </div>
-            {!!Object.keys(form.formState.errors).length && (
-              <div className='flex flex-col text-sm font-semibold gap-3 text-destructive'>
-                <span>All fields must be added</span>
-                {form.formState.errors.items && (
-                  <span>{form.formState.errors.items.message}</span>
-                )}
-              </div>
-            )}
           </div>
         </ScrollArea>
         <div className='p-6 md:px-14 md:py-8 border-t flex gap-2 justify-end'>
