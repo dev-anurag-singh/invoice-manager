@@ -13,12 +13,7 @@ import { useEffect, useState } from 'react';
 import InvoiceForm from './InvoiceForm';
 
 function CreateInvoice() {
-  const [isMounted, setIsMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // FUNCTION TO CLOSE SHEET
   const handleClose = () => {
@@ -27,31 +22,30 @@ function CreateInvoice() {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild disabled={!isMounted}>
+      <SheetTrigger asChild>
         <Button className='pl-[6px] pr-4 py-2'>
           <CirclePlus id='icon-plus' className='h-8 w-8 fill-white mr-2' />
           <span className='mt-[2px] mr-1'>New</span>
           <span className='hidden md:inline-block mt-[2px]'>Invoice</span>
         </Button>
       </SheetTrigger>
-      {isMounted && (
-        <SheetContent side={'left'} className='px-0 pt-8 pb-0 md:pt-14'>
-          <div className='h-full flex flex-col'>
-            <SheetTrigger className='flex gap-6 items-center mb-7 md:hidden pl-6 md:pl-14'>
-              <span>
-                <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
-              </span>
-              <span className='text-sm mt-1 text-foreground'>Go back</span>
-            </SheetTrigger>
-            <SheetHeader className='pb-6 pl-6 md:pl-14 md:pb-11'>
-              <SheetTitle className='text-lg leading-8 text-left'>
-                New Invoice
-              </SheetTitle>
-            </SheetHeader>
-            <InvoiceForm onClose={handleClose} />
-          </div>
-        </SheetContent>
-      )}
+
+      <SheetContent side={'left'} className='px-0 pt-8 pb-0 md:pt-14'>
+        <div className='h-full flex flex-col'>
+          <SheetTrigger className='flex gap-6 items-center mb-7 md:hidden pl-6 md:pl-14'>
+            <span>
+              <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
+            </span>
+            <span className='text-sm mt-1 text-foreground'>Go back</span>
+          </SheetTrigger>
+          <SheetHeader className='pb-6 pl-6 md:pl-14 md:pb-11'>
+            <SheetTitle className='text-lg leading-8 text-left'>
+              New Invoice
+            </SheetTitle>
+          </SheetHeader>
+          <InvoiceForm onClose={handleClose} />
+        </div>
+      </SheetContent>
     </Sheet>
   );
 }
