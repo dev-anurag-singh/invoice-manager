@@ -237,9 +237,9 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 control={form.control}
                 name='invoiceDate'
                 render={({ field }) => (
-                  <FormItem className=''>
+                  <FormItem className='flex flex-col'>
                     <FormLabel>Invoice Date</FormLabel>
-                    <Popover>
+                    <Popover modal>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
@@ -260,6 +260,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                           mode='single'
                           selected={field.value}
                           onSelect={field.onChange}
+                          disabled={date => date > new Date()}
                           initialFocus
                         />
                       </PopoverContent>
@@ -272,7 +273,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 control={form.control}
                 name='paymentTerm'
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='flex flex-col'>
                     <FormLabel>Payment Term</FormLabel>
                     <Select
                       onValueChange={field.onChange}
