@@ -84,6 +84,10 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
     console.log(values);
   };
 
+  const handleDraft = () => {
+    console.log(form.getValues());
+  };
+
   return (
     <Form {...form}>
       <form
@@ -407,7 +411,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
               Discard
             </Button>
           </div>
-          <Button type='button' variant={'tertiary'}>
+          <Button type='button' onClick={handleDraft} variant={'tertiary'}>
             Save as draft
           </Button>
           <Button>Save & Send</Button>

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from './ui/button';
 import { ChevronLeft, CirclePlus } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import InvoiceForm from './InvoiceForm';
 
 function CreateInvoice() {
