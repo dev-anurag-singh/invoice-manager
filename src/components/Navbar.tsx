@@ -1,5 +1,5 @@
-import { Moon } from 'lucide-react';
 import Logo from './Logo';
+import { ThemeToggler } from './ThemeToggler';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 function Navbar() {
@@ -9,7 +9,7 @@ function Navbar() {
         <Logo />
       </div>
       <div className='pr-6 flex items-center gap-6 lg:flex-col lg:pr-0 lg:pb-6'>
-        <Moon className=' fill-foreground-light cursor-pointer transition-colors hover:fill-white/70  stroke-inherit' />
+        <ThemeToggler />
         <div className='w-[1px] bg-[#494E6E] self-stretch lg:w-full lg:h-[1px]' />
         <Avatar>
           <AvatarImage src='https://github.com/dev-anurag-singh.png' />
