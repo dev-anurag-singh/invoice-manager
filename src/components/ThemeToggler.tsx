@@ -19,7 +19,7 @@ export function ThemeToggler() {
           <Button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             variant='ghost'
-            className='hover:bg-transparent'
+            className='hover:bg-transparent p-0'
           >
             <Moon className='hidden dark:inline-block fill-foreground-light cursor-pointer transition-colors hover:fill-white/70 stroke-inherit' />
             <Sun className='dark:hidden transition-colors hover:stroke-white/70 stroke-foreground-light' />
