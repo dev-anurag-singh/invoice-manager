@@ -1,3 +1,4 @@
+import { DeleteInvoice } from '@/components/DeleteInvoice';
 import InvoiceStatus from '@/components/InvoiceStatus';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -27,9 +28,12 @@ function Page({ params }: { params: { invoiceId: string } }) {
           <div className='bg-muted shadow-sm rounded-lg p-6 md:gap-5 flex justify-between md:justify-start items-center'>
             <p className='text-xs text-foreground-light'>Status</p>
             <InvoiceStatus status='pending' />
-            <div className='p-6 md:mr-2 md:ml-auto fixed md:p-0 md:static z-10 bottom-0 right-0 left-0 bg-muted flex justify-between gap-2 text-muted-foreground'>
+            <div className='p-6 md:mr-2 md:ml-auto fixed md:p-0 md:static z-10 bottom-0 right-0 left-0 bg-muted flex justify-end gap-2 text-muted-foreground'>
               <Button variant={'secondary'}>Edit</Button>
-              <Button variant={'destructive'}>Delete</Button>
+
+              {/* Delete Invoice Modal */}
+              <DeleteInvoice />
+
               <Button>Mark as Paid</Button>
             </div>
           </div>
