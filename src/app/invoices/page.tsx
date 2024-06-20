@@ -6,6 +6,12 @@ import { ChevronDown } from 'lucide-react';
 // IMPORTING DATA
 import data from '@/data.json';
 import CreateInvoice from '@/components/CreateInvoice';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import FilterInvoices from '@/components/FilterInvoices';
 
 export default function Home() {
   const invoices = data;
@@ -18,13 +24,7 @@ export default function Home() {
             {invoices.length} invoices
           </span>
         </div>
-        {/* TODO: ADDING A POPOVER */}
-        <div className='flex items-center gap-2'>
-          <span className='text-sm'>Filter</span>
-          <span>
-            <ChevronDown className='h-4 w-4 stroke-primary' />
-          </span>
-        </div>
+        <FilterInvoices />
         <CreateInvoice />
       </div>
       {invoices.length ? (
