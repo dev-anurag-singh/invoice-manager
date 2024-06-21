@@ -16,8 +16,8 @@ import FilterInvoices from '@/components/FilterInvoices';
 export default function Home() {
   const invoices = data;
   return (
-    <div className='container md:px-12 gap-8 py-8 h-full grid grid-cols-1 grid-rows-[auto_1fr]'>
-      <div className='flex items-center gap-5'>
+    <div className='container px-3 md:px-9 gap-8 py-8 h-full grid grid-cols-1 grid-rows-[auto_1fr]'>
+      <div className='px-3 flex items-center gap-5'>
         <div className='mr-auto flex flex-col'>
           <h2 className='text-lg md:text-xl'>Invoices</h2>
           <span className='text-foreground-light text-xs'>
@@ -29,7 +29,7 @@ export default function Home() {
       </div>
       {invoices.length ? (
         <ScrollArea className='h-full'>
-          <div className='space-y-4 md:px-3'>
+          <div className='space-y-4 px-3'>
             {invoices.map(invoice => (
               <InvoiceCard key={invoice.id} invoice={invoice} />
             ))}
