@@ -1,16 +1,10 @@
 import EmptyInvoices from '@/components/EmptyInvoices';
 import InvoiceCard from '@/components/InvoiceCard';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ChevronDown } from 'lucide-react';
 
 // IMPORTING DATA
 import data from '@/data.json';
 import CreateInvoice from '@/components/CreateInvoice';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import FilterInvoices from '@/components/FilterInvoices';
 
 export default function Home() {
