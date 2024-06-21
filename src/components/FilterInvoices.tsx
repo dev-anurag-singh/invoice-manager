@@ -1,24 +1,31 @@
 'use client';
-
 import { ChevronDown } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { Checkbox } from './ui/checkbox';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import FilterOption from './FilterOption';
+
+const filterOptions = ['draft', 'pending', 'paid'];
 
 function FilterInvoices() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const filterParams = searchParams.getAll('filter');
 
-  function handleFilter(term?: string) {
+  function handleFilter(append: boolean, term: string) {
     const params = new URLSearchParams(searchParams);
+    if (append) {
+      params.append('filter', term);
+    } else {
+      params.delete('filter', term);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }
 
-    console.log(params);
+  // CHECKING IF THE TERM IS INCLUDED IN FILTER PARAMETER
 
-    // if (term) {
-    //   params.set('filter', term);
-    // } else {
-    //   params.delete('filter');
-    // }
+  function isChecked(term: string) {
+    return filterParams.includes(term);
   }
 
   return (
@@ -34,33 +41,14 @@ function FilterInvoices() {
       </PopoverTrigger>
       <PopoverContent sideOffset={22} className='max-w-48 p-6'>
         <div className='flex flex-col gap-4'>
-          <div className='flex items-center space-x-3'>
-            <Checkbox onCheckedChange={v => handleFilter()} id='draft' />
-            <label
-              htmlFor='draft'
-              className='text-sm cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-            >
-              Draft
-            </label>
-          </div>
-          <div className='flex items-center space-x-3'>
-            <Checkbox onCheckedChange={v => handleFilter()} id='pending' />
-            <label
-              htmlFor='pending'
-              className='text-sm cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-            >
-              Pending
-            </label>
-          </div>
-          <div className='flex items-center space-x-3'>
-            <Checkbox onCheckedChange={v => handleFilter()} id='paid' />
-            <label
-              htmlFor='paid'
-              className='text-sm cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-            >
-              Paid
-            </label>
-          </div>
+          {filterOptions.map(option => (
+            <FilterOption
+              key={option}
+              label={option}
+              checked={isChecked(option)}
+              handleFilter={handleFilter}
+            />
+          ))}
         </div>
       </PopoverContent>
     </Popover>
