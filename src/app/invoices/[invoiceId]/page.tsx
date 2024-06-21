@@ -16,14 +16,14 @@ import Link from 'next/link';
 
 function Page({ params }: { params: { invoiceId: string } }) {
   return (
-    <div className='container pt-8 pb-28 md:pb-8 gap-8 md:px-12 h-full grid grid-rows-[auto_1fr]'>
-      <Link href={'/'} className='flex gap-6 items-center'>
+    <div className='container px-3 md:px-7 pt-8 pb-28 md:pb-8 gap-8 h-full grid grid-rows-[auto_1fr]'>
+      <Link href={'/'} className='flex gap-6 items-center px-3'>
         <span>
           <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
         </span>
         <span className='text-sm mt-1'>Go back</span>
       </Link>
-      <ScrollArea type='auto' className='pr-3'>
+      <ScrollArea type='auto' className='px-3'>
         <div className='space-y-4'>
           <div className='bg-muted shadow-sm rounded-lg p-6 md:gap-5 flex justify-between md:justify-start items-center'>
             <p className='text-xs text-foreground-light'>Status</p>
