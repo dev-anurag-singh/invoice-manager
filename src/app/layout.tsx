@@ -21,12 +21,10 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={cn(font.className)}>
         <Provider>
-          <div className='flex flex-col h-[100dvh] lg:flex-row'>
-            <Navbar />
-            <main id='main' className='basis-full overflow-hidden'>
-              {children}
-            </main>
-          </div>
+          <Navbar />
+          <main id='main' className='mt-[4.5rem] md:mt-20 lg:mt-0 lg:ml-24'>
+            {children}
+          </main>
         </Provider>
       </body>
     </html>
