@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 function Navbar() {
   return (
-    <header className='fixed top-0 left-0 w-full z-50 lg:h-full lg:w-auto flex shadow-sm bg-carbon-blue dark:bg-muted justify-between lg:flex-col lg:rounded-r-3xl'>
+    <header className='fixed top-0 left-0 w-full z-50 lg:h-full lg:w-auto border-b lg:border-none backdrop-blur flex shadow-sm bg-carbon-blue/95 dark:bg-muted/95 justify-between lg:flex-col lg:rounded-r-3xl'>
       <Link href={'/'}>
         <Logo />
       </Link>
