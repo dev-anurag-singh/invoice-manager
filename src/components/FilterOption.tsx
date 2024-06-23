@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useId } from 'react';
-import { Checkbox } from './ui/checkbox';
+import { useId } from "react";
+import { Checkbox } from "./ui/checkbox";
 
 interface FilterOptionProps {
   label: string;
@@ -13,10 +13,10 @@ function FilterOption({ label, checked, handleFilter }: FilterOptionProps) {
   const id = useId();
 
   return (
-    <div className='flex items-center space-x-3'>
+    <div className="flex items-center space-x-3">
       <Checkbox
         defaultChecked={checked}
-        onCheckedChange={state => {
+        onCheckedChange={(state) => {
           if (state === true) handleFilter(true, label);
           if (state === false) handleFilter(false, label);
         }}
@@ -24,7 +24,7 @@ function FilterOption({ label, checked, handleFilter }: FilterOptionProps) {
       />
       <label
         htmlFor={id}
-        className='text-sm capitalize cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+        className="cursor-pointer text-sm capitalize peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
       >
         {label}
       </label>

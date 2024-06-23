@@ -1,10 +1,10 @@
-'use client';
-import { ThemeProvider } from 'next-themes';
+"use client";
+import { ThemeProvider } from "next-themes";
 
 function Provider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
-      attribute='class'
+      attribute="class"
       enableSystem={false}
       disableTransitionOnChange
     >
