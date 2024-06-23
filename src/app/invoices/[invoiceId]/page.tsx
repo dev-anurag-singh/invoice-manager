@@ -1,6 +1,6 @@
-import { DeleteInvoice } from '@/components/DeleteInvoice';
-import InvoiceStatus from '@/components/InvoiceStatus';
-import { Button } from '@/components/ui/button';
+import { DeleteInvoice } from "@/components/DeleteInvoice";
+import InvoiceStatus from "@/components/InvoiceStatus";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,25 +9,25 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
+} from "@/components/ui/table";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 function Page({ params }: { params: { invoiceId: string } }) {
   return (
-    <div className='container pt-8 pb-32 md:pb-12 space-y-8'>
-      <Link scroll={false} href={'/'} className='flex gap-6 items-center px-3'>
+    <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-15">
+      <Link href={"/"} className="flex items-center gap-6 px-3">
         <span>
-          <ChevronLeft className='w-4 h-4 stroke-[3px] stroke-primary' />
+          <ChevronLeft className="h-4 w-4 stroke-primary stroke-[3px]" />
         </span>
-        <span className='text-sm mt-1'>Go back</span>
+        <span className="mt-1 text-sm">Go back</span>
       </Link>
-      <div className='space-y-4'>
-        <div className='bg-muted shadow-sm rounded-lg p-6 md:gap-5 flex justify-between md:justify-start items-center'>
-          <p className='text-xs text-foreground-light'>Status</p>
-          <InvoiceStatus status='pending' />
-          <div className='p-6 border-t md:border-none md:mr-2 md:ml-auto fixed md:p-0 md:static z-10 bottom-0 right-0 left-0 bg-muted/95 flex justify-end gap-2 text-muted-foreground backdrop-blur md:backdrop-blur-none'>
-            <Button variant={'secondary'}>Edit</Button>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between rounded-lg bg-muted p-6 shadow-sm md:justify-start md:gap-5">
+          <p className="text-xs text-foreground-light">Status</p>
+          <InvoiceStatus status="pending" />
+          <div className="fixed bottom-0 left-0 z-10 flex w-screen justify-end gap-2 border-t bg-muted/95 px-10 py-6 text-muted-foreground backdrop-blur md:static md:ml-auto md:mr-2 md:w-auto md:border-none md:p-0 md:backdrop-blur-none">
+            <Button variant={"secondary"}>Edit</Button>
 
             {/* Delete Invoice Modal */}
             <DeleteInvoice />
@@ -35,113 +35,113 @@ function Page({ params }: { params: { invoiceId: string } }) {
             <Button>Mark as Paid</Button>
           </div>
         </div>
-        <div className='p-6 space-y-8 md:space-y-5 shadow-sm bg-muted rounded-lg text-muted-foreground'>
-          <div className='space-y-7 md:space-y-0 md:flex md:justify-between'>
-            <div className='space-y-1'>
-              <h4 className='text-sm md:text-md'>
-                <span className='mr-0.5'>#</span>
-                <span className='text-foreground'>XM9141</span>
+        <div className="space-y-8 rounded-lg bg-muted p-6 text-muted-foreground shadow-sm md:space-y-5">
+          <div className="space-y-7 md:flex md:justify-between md:space-y-0">
+            <div className="space-y-1">
+              <h4 className="text-sm md:text-md">
+                <span className="mr-0.5">#</span>
+                <span className="text-foreground">XM9141</span>
               </h4>
-              <p className='text-xs'>Graphic Design</p>
+              <p className="text-xs">Graphic Design</p>
             </div>
-            <p className='text-base'>
+            <p className="text-base">
               19 Union Terrace <br /> London <br /> E1 3EZ <br /> United Kingdom
             </p>
           </div>
-          <div className='space-y-8 md:space-y-0 md:flex gap-28'>
-            <div className='flex gap-16 md:gap-28'>
-              <div className='flex flex-col justify-between'>
-                <div className='space-y-3'>
-                  <p className='text-xs'>Invoice Date</p>
-                  <h4 className='text-md leading-5 text-foreground'>
+          <div className="gap-28 space-y-8 md:flex md:space-y-0">
+            <div className="flex gap-16 md:gap-28">
+              <div className="flex flex-col justify-between">
+                <div className="space-y-3">
+                  <p className="text-xs">Invoice Date</p>
+                  <h4 className="text-md leading-5 text-foreground">
                     21 Aug 2021
                   </h4>
                 </div>
-                <div className='space-y-3'>
-                  <p className='text-xs'>Payment Due</p>
-                  <h4 className='text-md leading-5 text-foreground'>
+                <div className="space-y-3">
+                  <p className="text-xs">Payment Due</p>
+                  <h4 className="text-md leading-5 text-foreground">
                     20 Sep 2021
                   </h4>
                 </div>
               </div>
-              <div className='space-y-2'>
-                <div className='space-y-3'>
-                  <p className='text-xs'>Bill To</p>
-                  <h4 className='text-md leading-5 text-foreground'>
+              <div className="space-y-2">
+                <div className="space-y-3">
+                  <p className="text-xs">Bill To</p>
+                  <h4 className="text-md leading-5 text-foreground">
                     Alex Grim
                   </h4>
                 </div>
-                <p className='text-base'>
+                <p className="text-base">
                   84 Church Way <br /> Brandford <br /> BD1 9PB <br /> United
                   Kingdom
                 </p>
               </div>
             </div>
-            <div className='space-y-4'>
-              <p className='text-xs'>Sent to</p>
-              <h4 className='text-md leading-5 text-foreground'>
+            <div className="space-y-4">
+              <p className="text-xs">Sent to</p>
+              <h4 className="text-md leading-5 text-foreground">
                 alexgrim@mail.com
               </h4>
             </div>
           </div>
 
           {/* Table */}
-          <div className='rounded-md md:mt-[3rem!important] pt-2 md:pt-4 bg-accent text-accent-foreground overflow-hidden'>
-            <Table className=''>
-              <TableHeader className='hidden md:table-header-group'>
+          <div className="overflow-hidden rounded-md bg-accent pt-2 text-accent-foreground md:mt-[3rem!important] md:pt-4">
+            <Table className="">
+              <TableHeader className="hidden md:table-header-group">
                 <TableRow>
-                  <TableHead className='w-[50%] pl-8'>Item Name</TableHead>
-                  <TableHead className='text-center'>QTY.</TableHead>
-                  <TableHead className='text-right'>Price</TableHead>
-                  <TableHead className='text-right pr-8'>Total</TableHead>
+                  <TableHead className="w-[50%] pl-8">Item Name</TableHead>
+                  <TableHead className="text-center">QTY.</TableHead>
+                  <TableHead className="text-right">Price</TableHead>
+                  <TableHead className="pr-8 text-right">Total</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className='text-sm'>
+              <TableBody className="text-sm">
                 <TableRow>
-                  <TableCell className='text-foreground pl-4 pb-6 md:pl-8 md:pb-4 relative'>
+                  <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
                     Banner Design
-                    <span className='md:hidden absolute bottom-0 text-xs left-4'>
+                    <span className="absolute bottom-0 left-4 text-xs md:hidden">
                       1 x $ 150.00
                     </span>
                   </TableCell>
-                  <TableCell className='text-center hidden md:table-cell'>
+                  <TableCell className="hidden text-center md:table-cell">
                     1
                   </TableCell>
-                  <TableCell className='text-right hidden md:table-cell'>
+                  <TableCell className="hidden text-right md:table-cell">
                     $ 150.00
                   </TableCell>
-                  <TableCell className='text-right text-foreground pr-4 pl-0 md:pl-4 md:pr-8'>
+                  <TableCell className="pl-0 pr-4 text-right text-foreground md:pl-4 md:pr-8">
                     $150.00
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='text-foreground pl-4 pb-6 md:pl-8 md:pb-4 relative'>
+                  <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
                     Banner Design
-                    <span className='md:hidden absolute bottom-0 text-xs left-4'>
+                    <span className="absolute bottom-0 left-4 text-xs md:hidden">
                       1 x $ 150.00
                     </span>
                   </TableCell>
-                  <TableCell className='text-center hidden md:table-cell'>
+                  <TableCell className="hidden text-center md:table-cell">
                     1
                   </TableCell>
-                  <TableCell className='text-right hidden md:table-cell'>
+                  <TableCell className="hidden text-right md:table-cell">
                     $ 150.00
                   </TableCell>
-                  <TableCell className='text-right text-foreground pr-4 pl-0 md:pl-4 md:pr-8'>
+                  <TableCell className="pl-0 pr-4 text-right text-foreground md:pl-4 md:pr-8">
                     $150.00
                   </TableCell>
                 </TableRow>
               </TableBody>
-              <TableFooter className='bg-carbon-blue border-t-[1rem] border-accent dark:bg-[#0C0E16] text-white'>
+              <TableFooter className="border-t-[1rem] border-accent bg-carbon-blue text-white dark:bg-[#0C0E16]">
                 <TableRow>
-                  <TableCell className='py-6 pl-4 md:pl-8'>
+                  <TableCell className="py-6 pl-4 md:pl-8">
                     Grand Total
                   </TableCell>
                   <TableCell
                     colSpan={2}
-                    className='hidden md:table-cell'
+                    className="hidden md:table-cell"
                   ></TableCell>
-                  <TableCell className='text-right text-lg leading-8 pr-4 pl-0 md:pl-4 md:pr-8'>
+                  <TableCell className="pl-0 pr-4 text-right text-lg leading-8 md:pl-4 md:pr-8">
                     $ 250.0
                   </TableCell>
                 </TableRow>

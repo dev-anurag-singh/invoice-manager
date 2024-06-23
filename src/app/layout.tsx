@@ -22,7 +22,9 @@ export default function RootLayout({
       <body className={cn(font.className)}>
         <Provider>
           <Navbar />
-          <main id='main' className='mt-[4.5rem] md:mt-20 lg:mt-0 lg:ml-24'>
+          <main
+            className='mt-[4.5rem] md:mt-20 lg:mt-0 lg:ml-24 h-full'
+          >
             {children}
           </main>
         </Provider>
