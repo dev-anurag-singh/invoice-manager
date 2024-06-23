@@ -96,6 +96,21 @@
     margin: 0;
   }
 
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(231, 73%, 93%);
+    border-radius: 10px;
+  }
+
+  /* Add a thumb */
+  html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(233, 31%, 17%);
+  }
+
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;

@@ -12,7 +12,7 @@ import {
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { CalendarIcon, Trash } from "lucide-react";
+import { CalendarIcon, Trash2 } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import moment from "moment";
 import {
@@ -23,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { ScrollArea } from "./ui/scroll-area";
 
 const formSchema = z.object({
   from: z.object({
@@ -94,7 +93,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
         className="flex basis-full flex-col overflow-hidden"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <ScrollArea className="mr-2 basis-full md:mr-6">
+        <div className="custom-scrollbar mr-2 basis-full overflow-y-auto">
           <div className="space-y-10 pb-8 pl-6 pr-4 md:pl-14 md:pr-8">
             <div className="space-y-6">
               <h4 className="text-sm text-primary">Bill From</h4>
@@ -383,7 +382,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                         onClick={() => remove(index)}
                         className="ml-auto mr-2 mt-7 grid place-content-center md:mr-0"
                       >
-                        <Trash className="fill-[#888EB0] stroke-[#888EB0]" />
+                        <Trash2 className="stroke-[#888EB0]" />
                       </button>
                     </div>
                   </div>
@@ -404,7 +403,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
               )}
             </div>
           </div>
-        </ScrollArea>
+        </div>
         <div className="flex justify-end gap-2 border-t p-6 md:px-14 md:py-8">
           <div className="mr-auto hidden sm:block">
             <Button type="button" onClick={onClose} variant={"secondary"}>
