@@ -96,18 +96,8 @@
     margin: 0;
   }
 
-  body[data-scroll-locked] header {
-    padding-right: var(--removed-body-scroll-bar-size) !important;
-  }
-
-  @media screen and (min-width: 1024px) {
-    body[data-scroll-locked] header {
-      padding-right: 0 !important;
-    }
-  }
-
   /* Firefox */
-  input[type='number'] {
+  input[type="number"] {
     -moz-appearance: textfield;
   }
 }
