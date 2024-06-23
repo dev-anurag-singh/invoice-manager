@@ -5,6 +5,7 @@ import InvoiceCard from "@/components/InvoiceCard";
 import data from "@/data.json";
 import CreateInvoice from "@/components/CreateInvoice";
 import FilterInvoices from "@/components/FilterInvoices";
+import { Suspense } from "react";
 
 export default function Home() {
   const invoices = data;
@@ -17,7 +18,9 @@ export default function Home() {
             {invoices.length} invoices
           </span>
         </div>
-        <FilterInvoices />
+        <Suspense>
+          <FilterInvoices />
+        </Suspense>
         <CreateInvoice />
       </div>
       {invoices.length ? (
