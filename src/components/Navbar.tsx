@@ -14,7 +14,7 @@ function Navbar() {
         <div className="w-[1px] self-stretch bg-[#494E6E] lg:h-[1px] lg:w-full" />
         <Avatar>
           <AvatarImage src="https://github.com/dev-anurag-singh.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>A</AvatarFallback>
         </Avatar>
       </div>
     </header>
