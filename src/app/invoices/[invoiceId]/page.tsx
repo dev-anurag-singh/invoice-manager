@@ -15,7 +15,7 @@ import Link from "next/link";
 
 function Page({ params }: { params: { invoiceId: string } }) {
   return (
-    <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-15">
+    <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-16">
       <Link href={"/"} className="flex items-center gap-6 px-3">
         <span>
           <ChevronLeft className="h-4 w-4 stroke-primary stroke-[3px]" />
