@@ -11,7 +11,7 @@ export default function Home() {
   const invoices = data;
   return (
     <div className="container">
-      <div className="flex items-center gap-5 py-8">
+      <div className="flex items-center gap-5 py-8 md:py-16">
         <div className="mr-auto flex flex-col">
           <h2 className="text-lg md:text-xl">Invoices</h2>
           <span className="text-xs text-foreground-light">
