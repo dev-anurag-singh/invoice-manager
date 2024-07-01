@@ -1,5 +1,6 @@
 "use client";
 import { ThemeProvider } from "next-themes";
+import InvoiceProvider from "./InvoiceContext";
 
 function Provider({ children }: { children: React.ReactNode }) {
   return (
@@ -8,7 +9,7 @@ function Provider({ children }: { children: React.ReactNode }) {
       enableSystem={false}
       disableTransitionOnChange
     >
-      {children}
+      <InvoiceProvider>{children}</InvoiceProvider>
     </ThemeProvider>
   );
 }
