@@ -20,6 +20,11 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
   // FUNCTION TO ADD A NEW INVOICE
 
   // FUNTION TO DELETE AN INVOICE
+  function deleteInvoice(id: string) {
+    if (!value) return;
+    const filteredInvoices = value?.filter((invoice) => invoice.id !== id);
+    setValue(filteredInvoices);
+  }
 
   // FUNCTION TO UPDATE AN INVOICE
 
