@@ -21,6 +21,8 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
 
   // FUNTION TO DELETE AN INVOICE
 
+  // FUNCTION TO UPDATE AN INVOICE
+
   return (
     <InvoiceContext.Provider value={value}>{children}</InvoiceContext.Provider>
   );
