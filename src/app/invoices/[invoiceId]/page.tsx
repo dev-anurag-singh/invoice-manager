@@ -1,4 +1,6 @@
+"use client";
 import { DeleteInvoice } from "@/components/DeleteInvoice";
+import { useInvoice } from "@/components/InvoiceContext";
 import InvoiceStatus from "@/components/InvoiceStatus";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +13,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronLeft } from "lucide-react";
+import moment from "moment";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 function Page({ params }: { params: { invoiceId: string } }) {
+  const { invoices, deleteInvoice } = useInvoice();
+
+  const invoice = invoices.find((inv) => inv.id === params.invoiceId);
+
+  if (!invoice) {
+    notFound();
+  }
+
   return (
     <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-16">
       <Link href={"/"} className="flex items-center gap-6 px-3">
@@ -23,29 +35,31 @@ function Page({ params }: { params: { invoiceId: string } }) {
         <span className="mt-1 text-sm">Go back</span>
       </Link>
       <div className="space-y-4">
-        <div className="flex items-center justify-between rounded-lg bg-muted p-6 shadow-sm md:justify-start md:gap-5">
+        <div className="flex items-center justify-between rounded-lg bg-muted p-6 shadow-sm md:justify-start md:gap-5 md:px-8">
           <p className="text-xs text-foreground-light">Status</p>
-          <InvoiceStatus status="pending" />
+          <InvoiceStatus status={invoice.status} />
           <div className="fixed bottom-0 left-0 z-10 flex w-screen justify-end gap-2 border-t bg-muted/95 px-10 py-6 text-muted-foreground backdrop-blur md:static md:ml-auto md:mr-2 md:w-auto md:border-none md:p-0 md:backdrop-blur-none">
             <Button variant={"secondary"}>Edit</Button>
-
             {/* Delete Invoice Modal */}
-            <DeleteInvoice />
-
-            <Button>Mark as Paid</Button>
+            <DeleteInvoice id={invoice.id} />
+            {/* MARK AS PAID BUTTON ONLY AVALIABLE WHEN INVOICE STATUS IS PENDING */}
+            {invoice.status === "pending" && <Button>Mark as Paid</Button>}
           </div>
         </div>
-        <div className="space-y-8 rounded-lg bg-muted p-6 text-muted-foreground shadow-sm md:space-y-5">
+        <div className="space-y-8 rounded-lg bg-muted p-6 text-muted-foreground shadow-sm md:space-y-5 md:p-8 lg:p-12">
           <div className="space-y-7 md:flex md:justify-between md:space-y-0">
             <div className="space-y-1">
               <h4 className="text-sm md:text-md">
                 <span className="mr-0.5">#</span>
-                <span className="text-foreground">XM9141</span>
+                <span className="text-foreground">{invoice.id}</span>
               </h4>
-              <p className="text-xs">Graphic Design</p>
+              <p className="text-xs">{invoice.description}</p>
             </div>
-            <p className="text-base">
-              19 Union Terrace <br /> London <br /> E1 3EZ <br /> United Kingdom
+            <p className="flex flex-col text-base">
+              <span>{invoice.senderAddress.street}</span>
+              <span>{invoice.senderAddress.city}</span>
+              <span>{invoice.senderAddress.postCode}</span>
+              <span>{invoice.senderAddress.country}</span>
             </p>
           </div>
           <div className="gap-28 space-y-8 md:flex md:space-y-0">
@@ -54,13 +68,13 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 <div className="space-y-3">
                   <p className="text-xs">Invoice Date</p>
                   <h4 className="text-md leading-5 text-foreground">
-                    21 Aug 2021
+                    {moment(invoice.invoiceDate).format("D MMM YYYY")}
                   </h4>
                 </div>
                 <div className="space-y-3">
                   <p className="text-xs">Payment Due</p>
                   <h4 className="text-md leading-5 text-foreground">
-                    20 Sep 2021
+                    {moment(invoice.paymentDue).format("D MMM YYYY")}
                   </h4>
                 </div>
               </div>
@@ -68,19 +82,21 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 <div className="space-y-3">
                   <p className="text-xs">Bill To</p>
                   <h4 className="text-md leading-5 text-foreground">
-                    Alex Grim
+                    {invoice.clientName}
                   </h4>
                 </div>
-                <p className="text-base">
-                  84 Church Way <br /> Brandford <br /> BD1 9PB <br /> United
-                  Kingdom
+                <p className="flex flex-col text-base">
+                  <span>{invoice.clientAddress.street}</span>
+                  <span>{invoice.clientAddress.city}</span>
+                  <span>{invoice.clientAddress.postCode}</span>
+                  <span>{invoice.clientAddress.country}</span>
                 </p>
               </div>
             </div>
             <div className="space-y-4">
               <p className="text-xs">Sent to</p>
               <h4 className="text-md leading-5 text-foreground">
-                alexgrim@mail.com
+                {invoice.clientEmail}
               </h4>
             </div>
           </div>
@@ -97,40 +113,25 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 </TableRow>
               </TableHeader>
               <TableBody className="text-sm">
-                <TableRow>
-                  <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
-                    Banner Design
-                    <span className="absolute bottom-0 left-4 text-xs md:hidden">
-                      1 x $ 150.00
-                    </span>
-                  </TableCell>
-                  <TableCell className="hidden text-center md:table-cell">
-                    1
-                  </TableCell>
-                  <TableCell className="hidden text-right md:table-cell">
-                    $ 150.00
-                  </TableCell>
-                  <TableCell className="pl-0 pr-4 text-right text-foreground md:pl-4 md:pr-8">
-                    $150.00
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
-                    Banner Design
-                    <span className="absolute bottom-0 left-4 text-xs md:hidden">
-                      1 x $ 150.00
-                    </span>
-                  </TableCell>
-                  <TableCell className="hidden text-center md:table-cell">
-                    1
-                  </TableCell>
-                  <TableCell className="hidden text-right md:table-cell">
-                    $ 150.00
-                  </TableCell>
-                  <TableCell className="pl-0 pr-4 text-right text-foreground md:pl-4 md:pr-8">
-                    $150.00
-                  </TableCell>
-                </TableRow>
+                {invoice.items.map((item) => (
+                  <TableRow key={item.name}>
+                    <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
+                      {item.name}
+                      <span className="absolute bottom-0 left-4 text-xs md:hidden">
+                        {item.quantity} x $ {item.price}
+                      </span>
+                    </TableCell>
+                    <TableCell className="hidden text-center md:table-cell">
+                      {item.quantity}
+                    </TableCell>
+                    <TableCell className="hidden text-right md:table-cell">
+                      $ {item.price}
+                    </TableCell>
+                    <TableCell className="pl-0 pr-4 text-right text-foreground md:pl-4 md:pr-8">
+                      $ {item.total}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
               <TableFooter className="border-t-[1rem] border-accent bg-carbon-blue text-white dark:bg-[#0C0E16]">
                 <TableRow>
@@ -142,7 +143,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
                     className="hidden md:table-cell"
                   ></TableCell>
                   <TableCell className="pl-0 pr-4 text-right text-lg leading-8 md:pl-4 md:pr-8">
-                    $ 250.0
+                    $ {invoice.total}
                   </TableCell>
                 </TableRow>
               </TableFooter>
