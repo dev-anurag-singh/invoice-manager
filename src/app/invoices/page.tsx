@@ -1,14 +1,13 @@
+"use client";
 import EmptyInvoices from "@/components/EmptyInvoices";
 import InvoiceCard from "@/components/InvoiceCard";
-
-// IMPORTING DATA
-import data from "@/data.json";
 import CreateInvoice from "@/components/CreateInvoice";
 import FilterInvoices from "@/components/FilterInvoices";
 import { Suspense } from "react";
+import { useInvoice } from "@/components/InvoiceContext";
 
 export default function Home() {
-  const invoices = data;
+  const { invoices } = useInvoice();
   return (
     <div className="container">
       <div className="flex items-center gap-5 py-8 md:py-16">
