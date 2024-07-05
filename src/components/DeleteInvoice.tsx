@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-export function DeleteInvoice() {
+export function DeleteInvoice({ id }: { id: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -21,8 +21,8 @@ export function DeleteInvoice() {
         <AlertDialogHeader>
           <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete invoice #XM9141? This action cannot
-            be undone.
+            Are you sure you want to delete invoice #{id}? This action cannot be
+            undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
