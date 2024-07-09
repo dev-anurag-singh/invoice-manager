@@ -18,7 +18,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 function Page({ params }: { params: { invoiceId: string } }) {
-  const { invoices, deleteInvoice } = useInvoice();
+  const { invoices } = useInvoice();
 
   const invoice = invoices.find((inv) => inv.id === params.invoiceId);
 
