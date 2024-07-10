@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import Provider from "@/components/Provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = League_Spartan({ subsets: ["latin"] });
 
@@ -22,9 +23,10 @@ export default function RootLayout({
       <body className={cn(font.className)}>
         <Provider>
           <Navbar />
-          <main className="mt-[4.5rem] h-full md:mt-20 lg:ml-24 lg:mt-0">
+          <main className="h-full pt-[4.5rem] md:pt-20 lg:ml-24 lg:pt-0">
             {children}
           </main>
+          <Toaster />
         </Provider>
       </body>
     </html>
