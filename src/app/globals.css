@@ -116,3 +116,8 @@
     -moz-appearance: textfield;
   }
 }
+
+html,
+body {
+  height: 100%;
+}
