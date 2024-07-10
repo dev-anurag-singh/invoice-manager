@@ -2,24 +2,26 @@ import { TInvoice } from "@/lib/types";
 import { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import data from "@/data.json";
+import Loading from "./Loading";
 
 interface ContextType {
-  invoices: TInvoice[];
+  invoices: TInvoice[] | null;
   deleteInvoice: (id: string) => void;
 }
 
 const InvoiceContext = createContext<ContextType>({} as ContextType);
 
 function InvoiceProvider({ children }: { children: React.ReactNode }) {
-  const [value, setValue, removeValue] = useLocalStorage<TInvoice[]>(
+  const [value, setValue, removeValue] = useLocalStorage<TInvoice[] | null>(
     "invoices",
-    data,
+    null,
   );
 
   useEffect(() => {
-    setValue(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setValue]);
+    if (!value) {
+      setValue(data);
+    }
+  }, [setValue, value]);
 
   // FUNCTION TO ADD A NEW INVOICE
 
