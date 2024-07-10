@@ -5,9 +5,15 @@ import CreateInvoice from "@/components/CreateInvoice";
 import FilterInvoices from "@/components/FilterInvoices";
 import { Suspense } from "react";
 import { useInvoice } from "@/components/InvoiceContext";
+import { useIsMounted } from "../hooks/useIsMounted";
+import Loading from "@/components/Loading";
 
 export default function Home() {
   const { invoices } = useInvoice();
+  const [isMounted] = useIsMounted();
+
+  if (!isMounted || !invoices) return <Loading />;
+
   return (
     <div className="container">
       <div className="flex items-center gap-5 py-8 md:py-16">
