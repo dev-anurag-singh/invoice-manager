@@ -1,7 +1,9 @@
 "use client";
+import { useIsMounted } from "@/app/hooks/useIsMounted";
 import { DeleteInvoice } from "@/components/DeleteInvoice";
 import { useInvoice } from "@/components/InvoiceContext";
 import InvoiceStatus from "@/components/InvoiceStatus";
+import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -16,12 +18,17 @@ import { ChevronLeft } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { useState } from "react";
 
 function Page({ params }: { params: { invoiceId: string } }) {
   const { invoices } = useInvoice();
+  const [isMounted] = useIsMounted();
 
-  const invoice = invoices.find((inv) => inv.id === params.invoiceId);
+  const [invoice] = useState(
+   invoices && invoices.find((inv) => inv.id === params.invoiceId) || null,
+  );
 
+  if (!isMounted || !invoices) return <Loading />;
   if (!invoice) {
     notFound();
   }
