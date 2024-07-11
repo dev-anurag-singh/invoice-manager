@@ -12,10 +12,12 @@ function Navbar() {
       <div className="flex items-center gap-6 pr-10 lg:flex-col lg:pb-6 lg:pr-0">
         <ThemeToggler />
         <div className="w-[1px] self-stretch bg-[#494E6E] lg:h-[1px] lg:w-full" />
-        <Avatar>
-          <AvatarImage src="https://github.com/dev-anurag-singh.png" />
-          <AvatarFallback>A</AvatarFallback>
-        </Avatar>
+        <Link href={"https://github.com/dev-anurag-singh"} target="_blank">
+          <Avatar>
+            <AvatarImage src="https://github.com/dev-anurag-singh.png" />
+            <AvatarFallback>A</AvatarFallback>
+          </Avatar>
+        </Link>
       </div>
     </header>
   );
