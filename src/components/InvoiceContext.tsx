@@ -7,6 +7,7 @@ import Loading from "./Loading";
 interface ContextType {
   invoices: TInvoice[] | null;
   deleteInvoice: (id: string) => void;
+  markAsPaid: (id: string) => void;
 }
 
 const InvoiceContext = createContext<ContextType>({} as ContextType);
@@ -28,14 +29,26 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
   // FUNTION TO DELETE AN INVOICE
   function deleteInvoice(id: string) {
     if (!value) return;
-    const filteredInvoices = value?.filter((invoice) => invoice.id !== id);
+    const filteredInvoices = value.filter((invoice) => invoice.id !== id);
     setValue(filteredInvoices);
   }
 
   // FUNCTION TO UPDATE AN INVOICE
+  function markAsPaid(id: string) {
+    if (!value) return;
+
+    const filteredInvoices = value.filter((invoice) => invoice.id !== id);
+    const invoiceToUpdate = value.find((invoice) => invoice.id === id);
+
+    if (!invoiceToUpdate) return;
+
+    setValue([{ ...invoiceToUpdate, status: "paid" }, ...filteredInvoices]);
+  }
 
   return (
-    <InvoiceContext.Provider value={{ invoices: value, deleteInvoice }}>
+    <InvoiceContext.Provider
+      value={{ invoices: value, deleteInvoice, markAsPaid }}
+    >
       {children}
     </InvoiceContext.Provider>
   );
