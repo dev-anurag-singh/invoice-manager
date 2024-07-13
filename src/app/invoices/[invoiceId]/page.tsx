@@ -21,17 +21,24 @@ import { notFound } from "next/navigation";
 import { useState } from "react";
 
 function Page({ params }: { params: { invoiceId: string } }) {
-  const { invoices } = useInvoice();
+  const { invoices, markAsPaid } = useInvoice();
   const [isMounted] = useIsMounted();
 
-  const [invoice] = useState(
-   invoices && invoices.find((inv) => inv.id === params.invoiceId) || null,
+  const [invoice, setInvoice] = useState(
+    (invoices && invoices.find((inv) => inv.id === params.invoiceId)) || null,
   );
 
   if (!isMounted || !invoices) return <Loading />;
   if (!invoice) {
     notFound();
   }
+
+  const handlePaid = () => {
+    markAsPaid(invoice.id);
+    setInvoice((state) => {
+      return (state && { ...state, status: "paid" }) || null;
+    });
+  };
 
   return (
     <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-16">
@@ -50,7 +57,9 @@ function Page({ params }: { params: { invoiceId: string } }) {
             {/* Delete Invoice Modal */}
             <DeleteInvoice id={invoice.id} />
             {/* MARK AS PAID BUTTON ONLY AVALIABLE WHEN INVOICE STATUS IS PENDING */}
-            {invoice.status === "pending" && <Button>Mark as Paid</Button>}
+            {invoice.status === "pending" && (
+              <Button onClick={handlePaid}>Mark as Paid</Button>
+            )}
           </div>
         </div>
         <div className="space-y-8 rounded-lg bg-muted p-6 text-muted-foreground shadow-sm md:space-y-5 md:p-8 lg:p-12">
