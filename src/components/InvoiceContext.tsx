@@ -8,6 +8,7 @@ interface ContextType {
   invoices: TInvoice[] | null;
   deleteInvoice: (id: string) => void;
   markAsPaid: (id: string) => void;
+  createInvoice: (data: Partial<TInvoice>) => void;
 }
 
 const InvoiceContext = createContext<ContextType>({} as ContextType);
@@ -25,6 +26,9 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
   }, [setValue, value]);
 
   // FUNCTION TO ADD A NEW INVOICE
+  function createInvoice(data: Partial<TInvoice>) {
+    console.log(data);
+  }
 
   // FUNTION TO DELETE AN INVOICE
   function deleteInvoice(id: string) {
@@ -47,7 +51,7 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <InvoiceContext.Provider
-      value={{ invoices: value, deleteInvoice, markAsPaid }}
+      value={{ invoices: value, deleteInvoice, markAsPaid, createInvoice }}
     >
       {children}
     </InvoiceContext.Provider>
