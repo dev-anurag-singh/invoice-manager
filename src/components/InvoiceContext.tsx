@@ -14,7 +14,7 @@ interface ContextType {
 const InvoiceContext = createContext<ContextType>({} as ContextType);
 
 function InvoiceProvider({ children }: { children: React.ReactNode }) {
-  const [value, setValue, removeValue] = useLocalStorage<TInvoice[] | null>(
+  const [value, setValue] = useLocalStorage<TInvoice[] | null>(
     "invoices",
     null,
   );
