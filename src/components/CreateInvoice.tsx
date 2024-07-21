@@ -11,9 +11,11 @@ import { Button } from "./ui/button";
 import { ChevronLeft, CirclePlus } from "lucide-react";
 import { useState } from "react";
 import InvoiceForm from "./InvoiceForm";
+import { useInvoice } from "./InvoiceContext";
 
 function CreateInvoice() {
   const [isOpen, setIsOpen] = useState(false);
+  const { createInvoice } = useInvoice();
 
   // FUNCTION TO CLOSE SHEET
   const handleClose = () => {
@@ -43,7 +45,7 @@ function CreateInvoice() {
               New Invoice
             </SheetTitle>
           </SheetHeader>
-          <InvoiceForm onClose={handleClose} />
+          <InvoiceForm onClose={handleClose} onSubmit={createInvoice} />
         </div>
       </SheetContent>
     </Sheet>
