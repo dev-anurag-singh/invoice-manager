@@ -17,12 +17,12 @@ export interface TInvoice {
   invoiceDate: string;
   paymentDue: string;
   description: string;
-  paymentTerm: number;
+  paymentTerm: "1" | "7" | "14" | "30";
   clientName: string;
   clientEmail: string;
-  status: string;
+  status: "draft" | "pending" | "paid";
   senderAddress: address;
   clientAddress: address;
-  items: item[];
+  items: item[] | [];
   total: number;
 }
