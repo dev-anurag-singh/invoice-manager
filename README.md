@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Invoice Manager
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Invoice Manager is a web application designed to simplify the process of creating, managing, and tracking invoices. It provides an intuitive interface for users to manage their financial documents efficiently, with features that streamline the invoicing process.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Create Invoices:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   - Generate professional invoices with ease.
+   - Include crucial details such as client name, email, and address.
+   - Specify the work done for the client, invoice date, and payment terms.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Manage Invoices:**
 
-## Learn More
+   - Update existing invoices with new information or corrections.
+   - Mark invoices as paid to keep track of payments.
+   - Delete invoices that are no longer needed, ensuring your records are up-to-date and accurate.
 
-To learn more about Next.js, take a look at the following resources:
+3. **Filter Invoices:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Easily filter through your invoices to find those that are paid, pending, or in draft status.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. **Light/Dark Mode:**
 
-## Deploy on Vercel
+   - Toggle between light and dark modes to suit your visual preference and reduce eye strain.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Responsive Design:**
+   - Experience a fully responsive interface that looks great on any device.
+   - Benefit from stunning visuals and a seamless user experience, whether you’re using a desktop, tablet, or smartphone.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Screenshots
+
+![Dashboard](screenshots/preview.jpg)
+_Dashboard Overview_
+
+![Create Invoice](screenshots/create-invoice.png)
+_Create a New Invoice_
+
+## Installation
+
+To get started with the Invoice Manager, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/dev-anurag-singh/invoice-manager.git
+   ```
+2. **Install the dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+The application should now be running on http://localhost:3000.
