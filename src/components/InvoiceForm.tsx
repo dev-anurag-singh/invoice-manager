@@ -23,18 +23,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { useInvoice } from "./InvoiceContext";
+import { useToast } from "./ui/use-toast";
+import { TInvoice } from "@/lib/types";
 
 const formSchema = z.object({
   from: z.object({
     street: z.string().min(1, { message: `can't be empty` }),
     city: z.string().min(1, { message: `can't be empty` }),
-    post: z.string().min(1, { message: `can't be empty` }),
+    postCode: z.string().min(1, { message: `can't be empty` }),
     country: z.string().min(1, { message: `can't be empty` }),
   }),
   to: z.object({
     street: z.string().min(1, { message: `can't be empty` }),
     city: z.string().min(1, { message: `can't be empty` }),
-    post: z.string().min(1, { message: `can't be empty` }),
+    postCode: z.string().min(1, { message: `can't be empty` }),
     country: z.string().min(1, { message: `can't be empty` }),
   }),
   clientName: z.string().min(3, { message: "Invalid name" }),
@@ -46,6 +49,7 @@ const formSchema = z.object({
     message: "Invalid Term",
   }),
   description: z.string().min(1, { message: `can't be empty` }),
+  status: z.enum(["draft", "pending", "paid"]),
   items: z
     .object({
       name: z.string().min(1, { message: "Required" }),
@@ -58,17 +62,37 @@ const formSchema = z.object({
 
 interface InvoiceFormProps {
   onClose: () => void;
+  data?: TInvoice;
 }
 
-function InvoiceForm({ onClose }: InvoiceFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
+export type TFormSchema = z.infer<typeof formSchema>;
+
+function InvoiceForm({ onClose, data }: InvoiceFormProps) {
+  const { createInvoice, updateInvoice } = useInvoice();
+  const { toast } = useToast();
+
+  const form = useForm<TFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      from: { street: "", city: "", post: "", country: "" },
-      to: { street: "", city: "", post: "", country: "" },
-      clientName: "",
-      clientEmail: "",
-      description: "",
+      from: data?.senderAddress || {
+        street: "",
+        city: "",
+        postCode: "",
+        country: "",
+      },
+      to: data?.clientAddress || {
+        street: "",
+        city: "",
+        postCode: "",
+        country: "",
+      },
+      clientName: data?.clientName || "",
+      clientEmail: data?.clientEmail || "",
+      description: data?.description || "",
+      invoiceDate: new Date(data?.invoiceDate || ""),
+      paymentTerm: data?.paymentTerm || "7",
+      status: data?.status || "draft",
+      items: data?.items || [],
     },
   });
 
@@ -79,19 +103,34 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
 
   const watchQtyAndPrice = form.watch("items");
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
+  const handleSubmit = (values: TFormSchema) => {
+    const status = form.formState.isSubmitting ? "pending" : "draft";
+    // CREATE AN INVOICE
+    if (!data) {
+      const { id } = createInvoice({ ...values, status });
 
-  const handleDraft = () => {
-    console.log(form.getValues());
+      toast({
+        title: `Invoice #${id} created successfully`,
+        duration: 2000,
+      });
+    } else {
+      const { id } = updateInvoice(data.id, { ...values, status });
+
+      toast({
+        title: `Invoice #${id} updated successfully`,
+        duration: 2000,
+      });
+    }
+
+    // CLOSE THE MODAL
+    onClose();
   };
 
   return (
     <Form {...form}>
       <form
         className="flex basis-full flex-col overflow-hidden"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(handleSubmit)}
       >
         <div className="custom-scrollbar mr-2 basis-full overflow-y-auto">
           <div className="space-y-10 pb-8 pl-6 pr-4 md:pl-14 md:pr-8">
@@ -126,7 +165,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name="from.post"
+                  name="from.postCode"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Post Code</FormLabel>
@@ -209,7 +248,7 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name="to.post"
+                  name="to.postCode"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Post Code</FormLabel>
@@ -407,13 +446,19 @@ function InvoiceForm({ onClose }: InvoiceFormProps) {
         <div className="flex justify-end gap-2 border-t p-6 md:px-14 md:py-8">
           <div className="mr-auto hidden sm:block">
             <Button type="button" onClick={onClose} variant={"secondary"}>
-              Discard
+              {data ? "Cancel" : "Discard"}
             </Button>
           </div>
-          <Button type="button" onClick={handleDraft} variant={"tertiary"}>
-            Save as draft
-          </Button>
-          <Button>Save & Send</Button>
+          {!data && (
+            <Button
+              type="button"
+              onClick={() => handleSubmit(form.getValues())}
+              variant={"tertiary"}
+            >
+              Save as draft
+            </Button>
+          )}
+          <Button>{data ? "Update" : "Save & Send"}</Button>
         </div>
       </form>
     </Form>
