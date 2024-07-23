@@ -7,16 +7,27 @@ import { Suspense } from "react";
 import { useInvoice } from "@/components/InvoiceContext";
 import { useIsMounted } from "../hooks/useIsMounted";
 import Loading from "@/components/Loading";
-import { useSearchParams } from "next/navigation";
 import { TInvoice } from "@/lib/types";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: {
+    filter: string[] | string;
+  };
+}) {
   const { invoices } = useInvoice();
   const [isMounted] = useIsMounted();
-  const searchParams = useSearchParams();
-  const filterParams = searchParams.getAll("filter");
 
   if (!isMounted || !invoices) return <Loading />;
+
+  let filterParams: string[] = [];
+
+  if (typeof searchParams.filter === "string") {
+    filterParams = [searchParams.filter];
+  } else {
+    filterParams = searchParams.filter || [];
+  }
 
   let filteredInvoices: TInvoice[] = [];
 

@@ -35,9 +35,6 @@ function Page({ params }: { params: { invoiceId: string } }) {
 
   const handlePaid = () => {
     markAsPaid(invoice.id);
-    // setInvoice((state) => {
-    //   return (state && { ...state, status: "paid" }) || null;
-    // });
   };
 
   return (
