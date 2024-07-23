@@ -1,6 +1,7 @@
 "use client";
 import { useIsMounted } from "@/app/hooks/useIsMounted";
 import { DeleteInvoice } from "@/components/DeleteInvoice";
+import EditInvoice from "@/components/EditInvoice";
 import { useInvoice } from "@/components/InvoiceContext";
 import InvoiceStatus from "@/components/InvoiceStatus";
 import Loading from "@/components/Loading";
@@ -24,9 +25,8 @@ function Page({ params }: { params: { invoiceId: string } }) {
   const { invoices, markAsPaid } = useInvoice();
   const [isMounted] = useIsMounted();
 
-  const [invoice, setInvoice] = useState(
-    (invoices && invoices.find((inv) => inv.id === params.invoiceId)) || null,
-  );
+  const invoice =
+    invoices && invoices.find((inv) => inv.id === params.invoiceId);
 
   if (!isMounted || !invoices) return <Loading />;
   if (!invoice) {
@@ -35,9 +35,9 @@ function Page({ params }: { params: { invoiceId: string } }) {
 
   const handlePaid = () => {
     markAsPaid(invoice.id);
-    setInvoice((state) => {
-      return (state && { ...state, status: "paid" }) || null;
-    });
+    // setInvoice((state) => {
+    //   return (state && { ...state, status: "paid" }) || null;
+    // });
   };
 
   return (
@@ -53,7 +53,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
           <p className="text-xs text-foreground-light">Status</p>
           <InvoiceStatus status={invoice.status} />
           <div className="fixed bottom-0 left-0 z-10 flex w-screen justify-end gap-2 border-t bg-muted/95 px-10 py-6 text-muted-foreground backdrop-blur md:static md:ml-auto md:mr-2 md:w-auto md:border-none md:p-0 md:backdrop-blur-none">
-            <Button variant={"secondary"}>Edit</Button>
+            <EditInvoice invoice={invoice} />
             {/* Delete Invoice Modal */}
             <DeleteInvoice id={invoice.id} />
             {/* MARK AS PAID BUTTON ONLY AVALIABLE WHEN INVOICE STATUS IS PENDING */}
@@ -80,7 +80,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
           </div>
           <div className="gap-28 space-y-8 md:flex md:space-y-0">
             <div className="flex gap-16 md:gap-28">
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between gap-3">
                 <div className="space-y-3">
                   <p className="text-xs">Invoice Date</p>
                   <h4 className="text-md leading-5 text-foreground">
@@ -131,7 +131,7 @@ function Page({ params }: { params: { invoiceId: string } }) {
               <TableBody className="text-sm">
                 {invoice.items.map((item) => (
                   <TableRow key={item.name}>
-                    <TableCell className="relative pb-6 pl-4 text-foreground md:pb-4 md:pl-8">
+                    <TableCell className="relative pb-6 pl-4 capitalize text-foreground md:pb-4 md:pl-8">
                       {item.name}
                       <span className="absolute bottom-0 left-4 text-xs md:hidden">
                         {item.quantity} x $ {item.price}
