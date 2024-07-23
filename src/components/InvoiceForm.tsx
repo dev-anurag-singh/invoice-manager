@@ -89,7 +89,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
       clientName: data?.clientName || "",
       clientEmail: data?.clientEmail || "",
       description: data?.description || "",
-      invoiceDate: new Date(data?.invoiceDate || ""),
+      invoiceDate: data?.invoiceDate && new Date(data?.invoiceDate) || new Date(),
       paymentTerm: data?.paymentTerm || "7",
       status: data?.status || "draft",
       items: data?.items || [],
