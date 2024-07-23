@@ -444,21 +444,28 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
           </div>
         </div>
         <div className="flex justify-end gap-2 border-t p-6 md:px-14 md:py-8">
-          <div className="mr-auto hidden sm:block">
+          {!data ? (
+            <>
+              <div className="mr-auto hidden sm:block">
+                <Button type="button" onClick={onClose} variant={"secondary"}>
+                  Discard
+                </Button>
+              </div>
+
+              <Button
+                type="button"
+                onClick={() => handleSubmit(form.getValues())}
+                variant={"tertiary"}
+              >
+                Save as draft
+              </Button>
+            </>
+          ) : (
             <Button type="button" onClick={onClose} variant={"secondary"}>
-              {data ? "Cancel" : "Discard"}
-            </Button>
-          </div>
-          {!data && (
-            <Button
-              type="button"
-              onClick={() => handleSubmit(form.getValues())}
-              variant={"tertiary"}
-            >
-              Save as draft
+              Cancel
             </Button>
           )}
-          <Button>{data ? "Update" : "Save & Send"}</Button>
+          <Button>{data ? "Save Changes" : "Save & Send"}</Button>
         </div>
       </form>
     </Form>
