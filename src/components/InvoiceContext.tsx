@@ -122,7 +122,7 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
     const filteredInvoices = value.filter((invoice) => invoice.id !== id);
     setTimeout(() => {
       setValue(filteredInvoices);
-    }, 2000);
+    }, 1500);
   }
 
   // FUNCTION TO MARK AN INVOICE AS PAID
