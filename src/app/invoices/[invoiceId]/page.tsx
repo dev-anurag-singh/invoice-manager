@@ -19,23 +19,19 @@ import { ChevronLeft } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { useState } from "react";
 
 function Page({ params }: { params: { invoiceId: string } }) {
   const { invoices, markAsPaid } = useInvoice();
   const [isMounted] = useIsMounted();
 
+  if (!isMounted || !invoices) return <Loading />;
+
   const invoice =
     invoices && invoices.find((inv) => inv.id === params.invoiceId);
 
-  if (!isMounted || !invoices) return <Loading />;
   if (!invoice) {
     notFound();
   }
-
-  const handlePaid = () => {
-    markAsPaid(invoice.id);
-  };
 
   return (
     <div className="container space-y-8 pb-32 pt-8 md:py-12 lg:py-16">
@@ -55,7 +51,9 @@ function Page({ params }: { params: { invoiceId: string } }) {
             <DeleteInvoice id={invoice.id} />
             {/* MARK AS PAID BUTTON ONLY AVALIABLE WHEN INVOICE STATUS IS PENDING */}
             {invoice.status === "pending" && (
-              <Button onClick={handlePaid}>Mark as Paid</Button>
+              <Button onClick={() => markAsPaid(invoice.id)}>
+                Mark as Paid
+              </Button>
             )}
           </div>
         </div>
