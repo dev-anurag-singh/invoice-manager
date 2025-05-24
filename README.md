@@ -38,6 +38,14 @@ _Dashboard Overview_
 ![Create Invoice](screenshots/create-invoice.png)
 _Create a New Invoice_
 
+## Tech Stack
+
+- **React**
+- **Next**
+- **TypeScript**
+- **Tailwind CSS**
+- **Shadcn-ui**
+
 ## Installation
 
 To get started with the Invoice Manager, follow these steps:
