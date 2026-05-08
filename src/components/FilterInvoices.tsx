@@ -13,7 +13,7 @@ function FilterInvoices() {
   const filterParams = searchParams.getAll("filter");
 
   function handleFilter(append: boolean, term: string) {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
     if (append) {
       params.append("filter", term);
     } else {
