@@ -4,7 +4,7 @@ import { useLocalStorage } from "usehooks-ts";
 import data from "@/data.json";
 import { generateId } from "@/lib/generateId";
 import { TFormSchema as InvoiceFormSchema } from "./InvoiceForm";
-import moment from "moment";
+import { addDays, format } from "date-fns";
 
 interface ContextType {
   invoices: TInvoice[] | null;
@@ -32,11 +32,11 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
   // FUNCTION TO ADD A NEW INVOICE
   function createInvoice(data: InvoiceFormSchema) {
     const id = generateId();
-    const invoiceDate = moment(data.invoiceDate).format().split("T")[0];
-    const paymentDue = moment(data.invoiceDate)
-      .add(data.paymentTerm, "days")
-      .format()
-      .split("T")[0];
+    const invoiceDate = format(data.invoiceDate, "yyyy-MM-dd");
+    const paymentDue = format(
+      addDays(data.invoiceDate, Number(data.paymentTerm)),
+      "yyyy-MM-dd",
+    );
     let invoiceTotal = 0;
 
     const items = data.items.map(({ name, price, quantity }) => {
@@ -76,11 +76,11 @@ function InvoiceProvider({ children }: { children: React.ReactNode }) {
   function updateInvoice(id: string, data: InvoiceFormSchema) {
     const invoices = value?.filter((i) => i.id !== id) || [];
 
-    const invoiceDate = moment(data.invoiceDate).format().split("T")[0];
-    const paymentDue = moment(data.invoiceDate)
-      .add(data.paymentTerm, "days")
-      .format()
-      .split("T")[0];
+    const invoiceDate = format(data.invoiceDate, "yyyy-MM-dd");
+    const paymentDue = format(
+      addDays(data.invoiceDate, Number(data.paymentTerm)),
+      "yyyy-MM-dd",
+    );
     let invoiceTotal = 0;
 
     const items = data.items.map(({ name, price, quantity }) => {

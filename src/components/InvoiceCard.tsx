@@ -1,6 +1,6 @@
 import { ChevronRight, Dot } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
-import moment from "moment";
+import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import InvoiceStatus from "./InvoiceStatus";
 
@@ -27,7 +27,7 @@ function InvoiceCard({ invoice }: InvoiceCardProps) {
               </div>
               <div className="absolute bottom-8 left-0 space-x-[6px] text-xs md:static">
                 <span className="text-foreground-light">Due</span>
-                <span>{moment(invoice.paymentDue).format("D MMM YYYY")}</span>
+                <span>{format(parseISO(invoice.paymentDue), "d MMM yyyy")}</span>
               </div>
               <div>
                 <p className="text-xs">{invoice.clientName}</p>

@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { CalendarIcon, Trash2 } from "lucide-react";
 import { Calendar } from "./ui/calendar";
-import moment from "moment";
+import { format } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -289,7 +289,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
                             className="flex h-12 w-full items-center justify-between rounded-md bg-transparent text-foreground hover:bg-transparent hover:text-foreground"
                           >
                             {field.value ? (
-                              moment(field.value).format("D MMM YYYY")
+                              format(field.value, "d MMM yyyy")
                             ) : (
                               <span>Pick a Date</span>
                             )}

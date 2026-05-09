@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronLeft } from "lucide-react";
-import moment from "moment";
+import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -79,13 +79,13 @@ function Page({ params }: { params: { invoiceId: string } }) {
                 <div className="space-y-3">
                   <p className="text-xs">Invoice Date</p>
                   <h4 className="text-md leading-5 text-foreground">
-                    {moment(invoice.invoiceDate).format("D MMM YYYY")}
+                    {format(parseISO(invoice.invoiceDate), "d MMM yyyy")}
                   </h4>
                 </div>
                 <div className="space-y-3">
                   <p className="text-xs">Payment Due</p>
                   <h4 className="text-md leading-5 text-foreground">
-                    {moment(invoice.paymentDue).format("D MMM YYYY")}
+                    {format(parseISO(invoice.paymentDue), "d MMM yyyy")}
                   </h4>
                 </div>
               </div>
