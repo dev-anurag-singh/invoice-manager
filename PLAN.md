@@ -34,11 +34,10 @@ Working doc. Check items off as we complete them. Today: **2026-05-18**.
 - [ ] Verify dark mode still works (v4 uses `@variant dark` declaration)
 - [ ] Update `prettier-plugin-tailwindcss` to v4-compatible version
 
-### Phase 3c — shadcn/ui re-init for v4 + React 19
-- [ ] Rewrite [components.json](components.json) to new schema (`tailwind.css` instead of `tailwind.config`, new `iconLibrary` field)
-- [ ] `npx shadcn@latest init` (the renamed CLI; `shadcn-ui` package is deprecated)
-- [ ] Re-add each used component via `npx shadcn@latest add ...` so they pick up the v4 token layout — affects everything in [src/components/ui/](src/components/ui/)
-- [ ] Diff each regenerated component against current customizations and re-apply project-specific tweaks
+### Phase 3c — shadcn/ui config update (chose option A: no re-init)
+- [x] Update [components.json](components.json) to new v4 schema (`config: ""`, add `iconLibrary`, add `ui`/`lib`/`hooks` aliases)
+- [x] Existing components in [src/components/ui/](src/components/ui/) kept as-is — they work with Tailwind v4
+- [x] Future `npx shadcn@latest add X` will use the new schema; no regeneration of existing components
 
 ### Phase 3d — Radix unified package
 - [ ] Replace 12 individual `@radix-ui/react-*` deps with the single `radix-ui` package (or keep per-component — pick one)
