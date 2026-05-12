@@ -1,7 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import { useInvoice } from "@/components/InvoiceContext";
-import { useIsMounted } from "../hooks/useIsMounted";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import Loading from "@/components/Loading";
 import Invoices from "@/components/Invoices";
 

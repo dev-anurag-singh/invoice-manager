@@ -1,5 +1,5 @@
 "use client";
-import { useIsMounted } from "@/app/hooks/useIsMounted";
+import { useIsMounted } from "@/hooks/useIsMounted";
 import { DeleteInvoice } from "@/components/DeleteInvoice";
 import EditInvoice from "@/components/EditInvoice";
 import { useInvoice } from "@/components/InvoiceContext";
