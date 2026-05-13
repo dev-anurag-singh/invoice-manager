@@ -42,9 +42,7 @@ const formSchema = z.object({
   }),
   clientName: z.string().min(3, { message: "Invalid name" }),
   clientEmail: z.string().email({ message: "Invalid email" }),
-  invoiceDate: z.date({
-    invalid_type_error: "Invalid date",
-  }),
+  invoiceDate: z.date({ message: "Invalid date" }),
   paymentTerm: z.enum(["1", "7", "14", "30"], {
     message: "Invalid Term",
   }),
@@ -71,7 +69,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
   const { createInvoice, updateInvoice } = useInvoice();
   const { toast } = useToast();
 
-  const form = useForm<TFormSchema>({
+  const form = useForm<z.input<typeof formSchema>, any, TFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       from: data?.senderAddress || {
@@ -389,6 +387,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
                                 type="number"
                                 className="w-16"
                                 {...field}
+                                value={field.value as number | string}
                               />
                             </FormControl>
                           </FormItem>
@@ -405,6 +404,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
                                 type="number"
                                 className="w-[6.25rem]"
                                 {...field}
+                                value={field.value as number | string}
                               />
                             </FormControl>
                           </FormItem>
@@ -413,8 +413,8 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
                       <div className="space-y-2 overflow-clip text-muted-foreground md:w-[4.5rem]">
                         <label className="text-xs">Total</label>
                         <p className="grid h-12 items-center text-sm">
-                          {(watchQtyAndPrice.at(index)?.price || 0) *
-                            (watchQtyAndPrice.at(index)?.quantity || 0)}
+                          {Number(watchQtyAndPrice.at(index)?.price || 0) *
+                            Number(watchQtyAndPrice.at(index)?.quantity || 0)}
                         </p>
                       </div>
                       <button
@@ -454,7 +454,7 @@ function InvoiceForm({ onClose, data }: InvoiceFormProps) {
 
               <Button
                 type="button"
-                onClick={() => handleSubmit(form.getValues())}
+                onClick={() => handleSubmit(form.getValues() as TFormSchema)}
                 variant={"tertiary"}
               >
                 Save as draft
