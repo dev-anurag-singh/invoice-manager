@@ -1,4 +1,5 @@
 "use client";
+import { use } from "react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { DeleteInvoice } from "@/components/DeleteInvoice";
 import EditInvoice from "@/components/EditInvoice";
@@ -20,14 +21,15 @@ import { format, parseISO } from "date-fns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-function Page({ params }: { params: { invoiceId: string } }) {
+function Page({ params }: { params: Promise<{ invoiceId: string }> }) {
+  const { invoiceId } = use(params);
   const { invoices, markAsPaid } = useInvoice();
   const [isMounted] = useIsMounted();
 
   if (!isMounted || !invoices) return <Loading />;
 
   const invoice =
-    invoices && invoices.find((inv) => inv.id === params.invoiceId);
+    invoices && invoices.find((inv) => inv.id === invoiceId);
 
   if (!invoice) {
     notFound();
