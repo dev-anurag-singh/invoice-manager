@@ -4,70 +4,57 @@ Working doc. Check items off as we complete them. Today: **2026-05-18**.
 
 ---
 
-## 1. Outdated packages
+## 1. Outdated packages — ✅ ALL DONE
 
-### Already current (lockfile lag — `npm update` fixes)
-- [ ] Run `npm update` to refresh all `@radix-ui/*`, `clsx`, `class-variance-authority`, `react-hook-form`, `usehooks-ts`, `tailwindcss-animate`, `moment`
+### Phase 1 — Safe minor/patch bumps ✅
+- [x] `@hookform/resolvers` 3.3 → 3.10 (later → 5)
+- [x] `lucide-react` 0.365 → 0.x (later → 1.16)
+- [x] `tailwind-merge` 2.2 → 2.6 (later → 3)
+- [x] `npm update` to refresh Radix, clsx, cva, react-hook-form, usehooks-ts
 
-### Phase 1 — Safe minor/patch bumps
-- [ ] `@hookform/resolvers` 3.3 → 3.10
-- [ ] `lucide-react` 0.365 → latest 0.x
-- [ ] `tailwind-merge` 2.2 → 2.6
+### Phase 2 — date-fns v4 + drop moment ✅
+- [x] `date-fns` 3.6 → 4.2
+- [x] Replaced `moment` with `date-fns` across InvoiceContext, InvoiceForm, InvoiceCard, [invoiceId] page
+- [x] Removed `moment` from deps
 
-### Phase 2 — date-fns v4 + drop moment
-- [ ] Upgrade `date-fns` 3.6 → 4.2 (new tz module, import path changes)
-- [ ] Replace `moment` usage in [src/components/InvoiceContext.tsx](src/components/InvoiceContext.tsx) with `date-fns`
-- [ ] Remove `moment` from `package.json`
+### Phase 3 — next-themes + tailwind-merge v3 + lucide v1 ✅
+- [x] `next-themes` 0.3 → 0.4
+- [x] `tailwind-merge` 2 → 3
+- [x] `lucide-react` → 1.16 (all icon names still valid)
 
-### Phase 3 — next-themes + tailwind-merge v3
-- [ ] `next-themes` 0.3 → 0.4
-- [ ] `tailwind-merge` 2 → 3 (verify className merges across `cn()` usage)
+### Phase 3b — Tailwind CSS v4 ✅
+- [x] `tailwindcss` 3 → 4, `@tailwindcss/postcss` plugin, removed autoprefixer
+- [x] Deleted `tailwind.config.ts`, moved theme into [globals.css](src/app/globals.css) `@theme`
+- [x] `tailwindcss-animate` → `tw-animate-css`
+- [x] Ran `npx @tailwindcss/upgrade` codemod; dark mode verified
 
-### Phase 3b — Tailwind CSS v4 (major rewrite)
-- [ ] Upgrade `tailwindcss` 3 → 4
-- [ ] Swap PostCSS plugin: remove `tailwindcss` + `autoprefixer` entries, add `@tailwindcss/postcss` in [postcss.config.js](postcss.config.js)
-- [ ] Delete `tailwind.config.ts` (config now lives in CSS)
-- [ ] Move theme tokens into [src/app/globals.css](src/app/globals.css) using `@theme { ... }` and `@import "tailwindcss"`
-- [ ] Port shadcn CSS variables (`--background`, `--foreground`, etc.) to the new `@theme inline` block + `:root` / `.dark` blocks
-- [ ] Update `tailwindcss-animate` → `tw-animate-css` (the v4-compatible replacement)
-- [ ] Replace deprecated utilities (`bg-opacity-*`, `text-opacity-*`, `flex-shrink-*`, `flex-grow-*`) — codemod via `npx @tailwindcss/upgrade`
-- [ ] Verify dark mode still works (v4 uses `@variant dark` declaration)
-- [ ] Update `prettier-plugin-tailwindcss` to v4-compatible version
+### Phase 3c — shadcn/ui config update (option A: no re-init) ✅
+- [x] Updated [components.json](components.json) to v4 schema
+- [x] Existing ui components kept as-is
 
-### Phase 3c — shadcn/ui config update (chose option A: no re-init)
-- [x] Update [components.json](components.json) to new v4 schema (`config: ""`, add `iconLibrary`, add `ui`/`lib`/`hooks` aliases)
-- [x] Existing components in [src/components/ui/](src/components/ui/) kept as-is — they work with Tailwind v4
-- [x] Future `npx shadcn@latest add X` will use the new schema; no regeneration of existing components
+### Phase 3d — Radix unified package — DECISION: stayed granular
+- [x] Kept per-component `@radix-ui/react-*` (the unified `radix-ui` pkg is opt-in; no need)
 
-### Phase 3d — Radix unified package
-- [ ] Replace 12 individual `@radix-ui/react-*` deps with the single `radix-ui` package (or keep per-component — pick one)
-- [ ] Update imports: `import { Dialog } from "radix-ui"` style, or stay on `@radix-ui/react-dialog` if we keep granular
-- [ ] Decision: **stay granular** is fine; the unified package is opt-in. Note in code which we chose.
+### Phase 4 — react-day-picker v10 ✅
+- [x] 8.10 → 10.0, rewrote [calendar.tsx](src/components/ui/calendar.tsx) for new API (`initialFocus`→`autoFocus`, `Chevron` component)
 
-### Phase 4 — react-day-picker v10
-- [ ] `react-day-picker` 8.10 → 10.0 (full API rewrite)
-- [ ] Update [src/components/ui/calendar.tsx](src/components/ui/calendar.tsx) to new API
+### Phase 5/6 — zod v4 + resolvers v5 ✅
+- [x] `zod` 3 → 4 (`invalid_type_error`→`message`), `@hookform/resolvers` 3 → 5
+- [x] Updated useForm input/output typing in [InvoiceForm.tsx](src/components/InvoiceForm.tsx)
 
-### Phase 5 — zod v4
-- [ ] `zod` 3.23 → 4.4 (new error API)
-- [ ] Update schemas in [src/components/InvoiceForm.tsx](src/components/InvoiceForm.tsx)
+### Phase 7 — lucide-react v1 ✅ (done in Phase 3)
 
-### Phase 6 — hookform resolvers v5
-- [ ] `@hookform/resolvers` 3 → 5 (paired with zod v4)
+### Phase 8 — Next.js 16 + React 19 ✅
+- [x] `next` 14 → 15 → 16.2.6, `react`/`react-dom` 18 → 19
+- [x] `@types/react`/`@types/react-dom` → 19
+- [x] Unwrapped async `params` with `React.use()` in [invoiceId] page
+- [x] Rewrote `useIsMounted` with `useSyncExternalStore` (React Compiler rule)
 
-### Phase 7 — lucide-react v1
-- [ ] `lucide-react` 0.x → 1.16 (audit icon names for renames)
+### Phase 9 — ESLint 9 ✅
+- [x] ESLint 8 → 9, flat config; `eslint-config-next` → 16 native flat config
 
-### Phase 8 — Next.js 16 + React 19
-- [ ] `next` 14.1.4 → 15 (async params, caching defaults)
-- [ ] `next` 15 → 16.2.6
-- [ ] `react` / `react-dom` 18 → 19.2
-- [ ] Update `@types/react` and `@types/react-dom` to v19
-- [ ] Fix any RSC / async params regressions
-
-### Phase 9 — ESLint v9
-- [ ] `eslint` 8 → 9 (flat config migration)
-- [ ] `eslint-config-next` to match Next 16
+### Remaining (out of original scope — optional future bumps)
+- [ ] `@types/node` 20 → 25, `eslint` 9 → 10, `typescript` 5 → 6, `eslint-plugin-react-hooks` 5 → 7 (majors; defer)
 
 ---
 
